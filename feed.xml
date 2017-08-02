@@ -1,934 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-<title type="text">Jaan</title>
-<subtitle type="text">PhD student at Princeton.</subtitle>
+<title type="text">Michael</title>
+<subtitle type="text">MS student at UNC-Chapel Hill.</subtitle>
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="/feed.xml" />
 <link rel="alternate" type="text/html" href="" />
-<updated>2017-08-02T14:35:47-04:00</updated>
+<updated>2017-08-02T15:55:52-04:00</updated>
 <id>/</id>
 <author>
-  <name>Jaan Altosaar</name>
+  <name>Michael Bostwick</name>
   <uri>/</uri>
-  <email>jaan@jaan.io</email>
+  <email></email>
 </author>
 
 
 <entry>
-  <title type="html"><![CDATA[food2vec - Augmented cooking with machine intelligence]]></title>
-  <link rel="alternate" type="text/html" href="/food2vec-augmented-cooking-machine-intelligence/" />
-  <id>/food2vec-augmented-cooking-machine-intelligence</id>
-  <published>2017-01-22T00:00:00-05:00</published>
-  <updated>2017-01-22T00:00:00-05:00</updated>
+  <title type="html"><![CDATA[Hidden warnings; using topic modeling on Yelp reviews to predict health inspection violations]]></title>
+  <link rel="alternate" type="text/html" href="/hidden-warnings/" />
+  <id>/hidden-warnings</id>
+  <published>2017-05-03T00:00:00-04:00</published>
+  <updated>2017-05-03T00:00:00-04:00</updated>
   <author>
-    <name>Jaan Altosaar</name>
+    <name>Michael Bostwick</name>
     <uri></uri>
-    <email>jaan@jaan.io</email>
+    <email></email>
   </author>
-  <content type="html">&lt;p&gt;&lt;strong&gt;TL;DR: Check out the &lt;a href=&quot;https://altosaar.github.io/food2vec/&quot;&gt;tools demo&lt;/a&gt; to explore food analogies and recommendations, or scroll down for an interactive map of a hundred thousand recipes from around the world.&lt;/strong&gt;&lt;/p&gt;
+  <content type="html">&lt;p&gt;Using topic modeling on Yelp reviews to predict health inspection violations&lt;/p&gt;
 
-&lt;p&gt;I haven’t eaten in five days. I dream of food. I study food. Deep in ketosis, my body has adapted to consume itself: I am food. There is no better time to dig into modeling grub.&lt;/p&gt;
-
-&lt;p&gt;Machine intelligence has changed your life, from how you listen to music through Discover Weekly playlists, consume news through Facebook, or talk to your hand computer’s friendly digital assistant. But why hasn’t it changed how we eat? Can we modify the ingredients of language processing algorithms to get insights about food? If you tell me what you want to eat, can I recommend complementary foods, much like Spotify recommends complementary songs?&lt;/p&gt;
-
-&lt;p&gt;Word embeddings are a useful technique for analyzing discrete data. Say we use &lt;script type=&quot;math/tex&quot;&gt;170,000&lt;/script&gt; words from the Oxford English dictionary. We can represent each word (such as “food”) as a vector as follows: a list of &lt;script type=&quot;math/tex&quot;&gt;169,999&lt;/script&gt; zeros, with a single &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; at the location of the word in the vocabulary. In our case, “food” may be at location &lt;script type=&quot;math/tex&quot;&gt;29,163&lt;/script&gt; near other words beginning with the letter f. Then the vector for “food” would look like:&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;[0, 0, 0, ..., 0, 0, 1, 0, 0, ..., 0].&lt;/script&gt;
-
-&lt;p&gt;However, this is inadequate for comparing words. To compare documents and get useful insights from our data, we need to aggregate over &lt;script type=&quot;math/tex&quot;&gt;170,000&lt;/script&gt; dimensions for each word, which takes far too long. Can we do better?&lt;/p&gt;
-
-&lt;p&gt;Embeddings let us reduce the dimensionality of the problem, and give us a powerful representation of language. We can build a model of language where we assign a hundred random numbers to each word. To train the model, we use these hundred numbers of each word to predict their context. The “context” of a word consists of its surrounding words. This is the main idea: the context means that words that occur in similar contexts should have similar meanings. We tweak tweak the numbers assigned to a word to make them better at predicting words in the context. Initially, the random numbers assigned to a word will be bad at predicting words in the context. But gradually, through this process of tweaking the model’s predictions of surrounding words, we get a hundred numbers that are far from random. The hundred numbers representing each word will capture part of its meaning: similar words will cluster together because they occur in each other’s contexts, and words with different meanings are pushed far apart (out-of-context). By representing each word as an embedding in &lt;script type=&quot;math/tex&quot;&gt;100&lt;/script&gt; dimensions, we have reduced the dimensionality more than a thousandfold from &lt;script type=&quot;math/tex&quot;&gt;170,000&lt;/script&gt; and gained a better representation of language.&lt;/p&gt;
-
-&lt;p&gt;For modeling food, we have a collection of recipes. We can define the context of an ingredient in a recipe to be the rest of the foods in the recipe. This demonstrates the flexibility of embeddings: by making a small change in the definition of the context, we can now apply it to a totally different kind of data.&lt;/p&gt;
-
-&lt;h3 id=&quot;food-similarity-map&quot;&gt;Food similarity map&lt;/h3&gt;
-
-&lt;p&gt;After training the embedding algorithm on a collection of &lt;script type=&quot;math/tex&quot;&gt;95, 896&lt;/script&gt; recipes, we get &lt;script type=&quot;math/tex&quot;&gt;100&lt;/script&gt;-dimensional embeddings for each food. Humans can’t visualize high dimensions, so we use an approximation technique to visualize similarity between the foods in two dimensions.&lt;/p&gt;
-
-&lt;p&gt;Here is a similarity map of the &lt;script type=&quot;math/tex&quot;&gt;2,087&lt;/script&gt; ingredients used in the recipes. Hover over a point to see which food it represents:&lt;/p&gt;
-
-&lt;iframe width=&quot;100%&quot; height=&quot;800&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot; src=&quot;/files/food2vec_food_embeddings_tsne.html&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;The map of foods is reasonable. Ingredients from Asia cluster together, as do ingredients used in European and North American cooking.&lt;/p&gt;
-
-&lt;h3 id=&quot;recipe-embedding-map&quot;&gt;Recipe embedding map&lt;/h3&gt;
-
-&lt;p&gt;We can generate an embedding for a recipe by taking the average of its ingredients’ embeddings. Here is a map of &lt;script type=&quot;math/tex&quot;&gt;95, 896&lt;/script&gt; recipes from around the world. Hover over a point to see the recipe, and click on the cuisine legend on the right to show or hide certain regions:&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;IMPORTANT: you are about to download 15MB of data.&lt;/em&gt; Click &lt;a href=&quot;/files/food2vec_recipe_embeddings_tsne.html&quot;&gt;here&lt;/a&gt; to access the map, zoom in, and discover new flavors. Is this the fastest way to browse 100k recipes by similarity?&lt;/p&gt;
-
-&lt;p&gt;Interesting patterns emerge. Asian recipes cluster together, as do Southern European recipes. Northern European and American foods are all over the place, maybe because of transmission of recipes due to migration, or over-representation in the data.&lt;/p&gt;
-
-&lt;h3 id=&quot;food-similarity-tool&quot;&gt;Food similarity tool&lt;/h3&gt;
-
-&lt;p&gt;Access the tool at &lt;a href=&quot;https://altosaar.github.io/food2vec/#food-similarity-tool&quot;&gt;this link&lt;/a&gt;. We can calculate food similarity by looking at which food is closest in the high dimensional space in the embeddings.&lt;/p&gt;
-
-&lt;p&gt;These mostly make sense - foods are closest to other foods they appear with in recipes:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Cheese is closest to macaroni&lt;/li&gt;
-  &lt;li&gt;Sesame oil is closest to egg noodle&lt;/li&gt;
-  &lt;li&gt;Milk is closest to nutmeg&lt;/li&gt;
-  &lt;li&gt;Olive oil is closest to parmesan cheese&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;food-analogy-tool&quot;&gt;Food analogy tool&lt;/h3&gt;
-
-&lt;p&gt;Access the tool &lt;a href=&quot;https://altosaar.github.io/food2vec/#food-analogy-tool&quot;&gt;here&lt;/a&gt;. Food analogies, like word analogies, are calculated with vector arithmetic. For the analogy “Food A is to food B, as food C is to food D”, the goal is to predict a reasonable food D. We can do this by subtracting food B from food A, then adding food C. For example, calculating &lt;script type=&quot;math/tex&quot;&gt;(bacon - egg) + orangejuice&lt;/script&gt; in embedding space will yield an embedding. The closest embedding to this is &lt;script type=&quot;math/tex&quot;&gt;coffee&lt;/script&gt; in our model of food. The classic example from word embeddings is &lt;script type=&quot;math/tex&quot;&gt;(king - man) + woman = queen&lt;/script&gt;. Is this intuitive? King is to man as woman is to queen makes sense in natural language, but food analogies are less clear. With practice, we may be able to train our taste detectors and devise hypotheses to test in the realm of food. I also included cuisine embeddings by representing them as the average of their recipes’ embeddings.&lt;/p&gt;
-
-&lt;p&gt;Some of these are more plausible than others:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Egg is to bacon as orange juice is to coffee.&lt;/li&gt;
-  &lt;li&gt;Bread is to butter as roast beef is to sage.&lt;/li&gt;
-  &lt;li&gt;Smoked salmon is to dill as lamb is to asparagus.&lt;/li&gt;
-  &lt;li&gt;South Asian is to rice as Southern European is to thyme.&lt;/li&gt;
-  &lt;li&gt;Rice is to sesame seed as macaroni is to pimento.&lt;/li&gt;
-  &lt;li&gt;Roasted beef is to green bell pepper as pork sausage is to fenugreek.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;recipe-recommendation-tool&quot;&gt;Recipe recommendation tool&lt;/h3&gt;
-
-&lt;p&gt;Access the tool &lt;a href=&quot;https://altosaar.github.io/food2vec/#recipe-recommendation-tool&quot;&gt;here&lt;/a&gt;. We can use our model of food as a recommendation system for cooks. By taking the average embedding for a set of foods, we can look up foods with the closest embeddings.&lt;/p&gt;
-
-&lt;p&gt;For example, I am a lifelong aficionado of peanut butter jam sandwiches. I entered my usual favorite: white bread, butter, peanut butter, honey. The top recommendation was: strawberry. I’ve never tried that, and it’s pretty good! I happily broke my fast with it. For the recipe of lamb, cumin, tomato, the top recommendation is raisin - also reasonable and interesting. Other recommendations are a bit wackier, so best of luck.&lt;/p&gt;
-
-&lt;p&gt;If you end up adding an ingredient to your food based on these tools, I’d love to hear how it tasted: ping me on &lt;a href=&quot;https://twitter.com/thejaan&quot;&gt;Twitter&lt;/a&gt; or &lt;a href=&quot;mailto:altosaar@princeton.edu&quot;&gt;email&lt;/a&gt;!&lt;/p&gt;
-
-&lt;h3 id=&quot;whats-next&quot;&gt;What’s next?&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Figuring out the right user interface to explore these models. The code for the plots and recommendation tools is on &lt;a href=&quot;https://github.com/altosaar/food2vec&quot;&gt;github&lt;/a&gt;. It would be great to make these mobile-friendly and test other ways of presenting recommendations from the model to users.&lt;/li&gt;
-  &lt;li&gt;word2vec is not the best model for this. Multi-class regression should work well, and I added a working &lt;a href=&quot;https://github.com/altosaar/food2vec/blob/master/src/food2vec.py&quot;&gt;demo of this&lt;/a&gt; to the repo. This is a rare case where the vocabulary size (number of ingredients) is very small, so we can fit both models and compare them. This could reveal idiosyncrasies in the non-contrastive estimation loss used in word2vec and provides an interesting testbed.&lt;/li&gt;
-  &lt;li&gt;Scaling up the data:  Do you have a larger dataset of recipes, or do you know how to scrape one? I’d love to check it out. This would also fix bias in the data as the majority of the recipes are currently North American.&lt;/li&gt;
-  &lt;li&gt;Testing out recipe analogies combined with food analogies: this may be more intuitive for us humans. For example, “pancakes are to maple syrup, as an omelette is to cheese” could be easier to think about than analogies with individual ingredients.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;resources&quot;&gt;Resources&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;This NYT piece, &lt;a href=&quot;https://www.nytimes.com/2016/12/14/magazine/the-great-ai-awakening.html&quot;&gt;The Great AI Awakening&lt;/a&gt;, does a much better job at describing embeddings than I can&lt;/li&gt;
-  &lt;li&gt;Wesley has a neat paper on a similar approach: &lt;a href=&quot;https://arxiv.org/abs/1612.00388&quot;&gt;diet2vec&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Sanjeev Arora’s &lt;a href=&quot;http://www.offconvex.org/2016/02/14/word-embeddings-2/&quot;&gt;research&lt;/a&gt; has good explanations for the analogy properties of embeddings&lt;/li&gt;
-  &lt;li&gt;The &lt;a href=&quot;https://www.oreilly.com/learning/an-illustrated-introduction-to-the-t-sne-algorithm&quot;&gt;t-SNE algorithm&lt;/a&gt; for visualizing high-dimensional embeddings&lt;/li&gt;
-  &lt;li&gt;The original &lt;a href=&quot;http://www.nature.com/articles/srep00196&quot;&gt;Nature Scientific Report&lt;/a&gt; with the data&lt;/li&gt;
-  &lt;li&gt;Dave taught a fantastic &lt;a href=&quot;http://www.cs.columbia.edu/~blei/seminar/2016_discrete_data/index.html&quot;&gt;class&lt;/a&gt; that helped me understand embeddings&lt;/li&gt;
-  &lt;li&gt;Maja’s paper on &lt;a href=&quot;https://arxiv.org/abs/1608.00778&quot;&gt;exponential family embeddings&lt;/a&gt; generalizes word2vec to other distributions that would be neat to try on this data (word2vec can be interpreted as a Bernoulli embedding model with biased gradients)&lt;/li&gt;
-  &lt;li&gt;There are a few other versions of food2vec floating around, like &lt;a href=&quot;https://automateddeveloper.blogspot.com/2016/10/unsupervised-learning-in-scala-using.html&quot;&gt;Rob Hinds’&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;em&gt;Thanks to &lt;a href=&quot;http://www.cs.columbia.edu/~blei/&quot;&gt;Dave&lt;/a&gt; for the idea, &lt;a href=&quot;http://sociology.columbia.edu/node/66&quot;&gt;Peter Bearman&lt;/a&gt; for presenting his work to our group, &lt;a href=&quot;https://www.flickr.com/photos/mealmakeovermoms/&quot;&gt;MealMakeOverMoms&lt;/a&gt; for the mise photo, &lt;a href=&quot;http://anthony.ai/&quot;&gt;Anthony&lt;/a&gt; for open-sourcing the embedding browser on which ours is based,  and &lt;a href=&quot;https://plot.ly/&quot;&gt;Plotly&lt;/a&gt; for open-sourcing their fantastic plotting library.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Feel free to ping me on &lt;a href=&quot;https://twitter.com/thejaan&quot;&gt;Twitter&lt;/a&gt; or &lt;a href=&quot;mailto:altosaar@princeton.edu&quot;&gt;email&lt;/a&gt; with feedback or ideas!&lt;/p&gt;
-
-&lt;p&gt;Discussion on &lt;a href=&quot;https://news.ycombinator.com/item?id=13472721&quot;&gt;Hacker News&lt;/a&gt; and &lt;a href=&quot;https://www.reddit.com/r/MachineLearning/comments/5px9uz/p_food_visualization_and_recommendation_engine_in/&quot;&gt;Reddit&lt;/a&gt;. Also see &lt;a href=&quot;https://github.com/altosaar/food2vec/blob/master/doc/food2vec-nytimes-talk.pdf&quot;&gt;slides&lt;/a&gt; from a talk at the New York Times on this project.&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;/food2vec-augmented-cooking-machine-intelligence/&quot;&gt;food2vec - Augmented cooking with machine intelligence&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on January 22, 2017.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/hidden-warnings/&quot;&gt;Hidden warnings; using topic modeling on Yelp reviews to predict health inspection violations&lt;/a&gt; was originally published by Michael Bostwick at &lt;a href=&quot;&quot;&gt;Michael&lt;/a&gt; on May 03, 2017.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
-  <title type="html"><![CDATA[Operator Variational Inference]]></title>
-  <link rel="alternate" type="text/html" href="/operator-variational-inference/" />
-  <id>/operator-variational-inference</id>
-  <published>2016-10-31T00:00:00-04:00</published>
-  <updated>2016-10-31T00:00:00-04:00</updated>
+  <title type="html"><![CDATA[Yelp review text recommender system]]></title>
+  <link rel="alternate" type="text/html" href="/yelp-recommender/" />
+  <id>/yelp-recommender</id>
+  <published>2016-12-03T00:00:00-05:00</published>
+  <updated>2016-12-03T00:00:00-05:00</updated>
   <author>
-    <name>Jaan Altosaar</name>
+    <name>Michael Bostwick</name>
     <uri></uri>
-    <email>jaan@jaan.io</email>
+    <email></email>
   </author>
-  <content type="html">&lt;p&gt;New divergences for variational inference that make explicit tradeoffs such as computation and performance.&lt;/p&gt;
+  <content type="html">&lt;p&gt;Using topic modeling on Yelp reviews to recommend new restaurants to users.&lt;/p&gt;
 
-&lt;p&gt;R. Ranganath, J. Altosaar, D. Tran, D. Blei. Operator Variational Inference. NIPS, 2016.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/papers/2016_Ranganath-Altosaar-Tran-Blei_OperatorVI.pdf&quot;&gt;&lt;i class=&quot;fa fa-file-pdf-o&quot;&gt;&lt;/i&gt; PDF&lt;/a&gt; &lt;a href=&quot;https://github.com/blei-lab/publications/tree/master/2016_RanganathAltosaarTranBlei&quot;&gt;&lt;i class=&quot;fa fa-wrench&quot;&gt;&lt;/i&gt; LaTeX Source&lt;/a&gt; &lt;a href=&quot;https://arxiv.org/abs/1610.09033&quot;&gt;&lt;i class=&quot;fa fa-institution&quot;&gt;&lt;/i&gt; arXiv&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;/operator-variational-inference/&quot;&gt;Operator Variational Inference&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on October 31, 2016.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/yelp-recommender/&quot;&gt;Yelp review text recommender system&lt;/a&gt; was originally published by Michael Bostwick at &lt;a href=&quot;&quot;&gt;Michael&lt;/a&gt; on December 03, 2016.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
-  <title type="html"><![CDATA[Word embedding models for recommendation]]></title>
-  <link rel="alternate" type="text/html" href="/factorization-item-embedding/" />
-  <id>/factorization-item-embedding</id>
-  <published>2016-08-05T00:00:00-04:00</published>
-  <updated>2016-08-05T00:00:00-04:00</updated>
+  <title type="html"><![CDATA[Impact of Survey Device on Response to an Early Season Influenza Vaccination Survey]]></title>
+  <link rel="alternate" type="text/html" href="/survey-device-effect/" />
+  <id>/survey-device-effect</id>
+  <published>2016-05-15T00:00:00-04:00</published>
+  <updated>2016-05-15T00:00:00-04:00</updated>
   <author>
-    <name>Jaan Altosaar</name>
+    <name>Michael Bostwick</name>
     <uri></uri>
-    <email>jaan@jaan.io</email>
+    <email></email>
   </author>
-  <content type="html">&lt;p&gt;Ideas from word embeddings can boost recommendation performance in matrix factorization systems.&lt;/p&gt;
+  <content type="html">&lt;p&gt;Lead author/poster presenter at AAPOR 2016.&lt;/p&gt;
 
-&lt;p&gt;Dawen Liang, Jaan Altosaar, Laurent Charlin, and David Blei. Factorization meets the item embedding. &lt;a href=&quot;https://recsys.acm.org/recsys16/&quot;&gt;Recsys 2016&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;2016_Liang-Altosaar-Charlin-Blei_CoFactor.pdf&quot;&gt;&lt;i class=&quot;fa fa-file-pdf-o&quot;&gt;&lt;/i&gt; PDF&lt;/a&gt; &lt;a href=&quot;https://github.com/dawenl/cofactor&quot;&gt;&lt;i class=&quot;fa fa-github&quot;&gt;&lt;/i&gt; Github&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;/factorization-item-embedding/&quot;&gt;Word embedding models for recommendation&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on August 05, 2016.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/survey-device-effect/&quot;&gt;Impact of Survey Device on Response to an Early Season Influenza Vaccination Survey&lt;/a&gt; was originally published by Michael Bostwick at &lt;a href=&quot;&quot;&gt;Michael&lt;/a&gt; on May 15, 2016.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
-  <title type="html"><![CDATA[Variational Autoencoder Perspectives]]></title>
-  <link rel="alternate" type="text/html" href="/variational-autoencoder-perspectives/" />
-  <id>/variational-autoencoder-perspectives</id>
-  <published>2016-07-24T00:00:00-04:00</published>
-  <updated>2016-07-24T00:00:00-04:00</updated>
+  <title type="html"><![CDATA[Fit for Purpose]]></title>
+  <link rel="alternate" type="text/html" href="/fit-for-purpose/" />
+  <id>/fit-for-purpose</id>
+  <published>2015-05-15T00:00:00-04:00</published>
+  <updated>2015-05-15T00:00:00-04:00</updated>
   <author>
-    <name>Jaan Altosaar</name>
+    <name>Michael Bostwick</name>
     <uri></uri>
-    <email>jaan@jaan.io</email>
+    <email></email>
   </author>
-  <content type="html">### Takeaway: why the neural net perspective limits us
+  <content type="html">&lt;p&gt;Poster presenter at AAPOR 2015.&lt;/p&gt;
 
-I hope you are convinced that reasoning about the variational autoencoder is less ambiguous and less confusing from the perspective of variational inference in probability models. In neural net language, the variational autoencoder refers to an encoder, a decoder, and a loss function. In probability model terms, the variational autoencoder refers to approximate inference in a latent Gaussian model, where the approximate posterior and model likelihood are parametrized by neural nets (the inference and generative networks). The sentence describing the variational autoencoder in neural net terms is unclear: What is the encoder? What does the decoder mean? What is the loss function? Each term requires further explanation. In contrast, the probability model language gives us an objective function (the ELBO) for free, and we can simply state that we parametrize the approximate posterior and model with neural nets.
-
-Here are more reasons why we should favor the probability model perspective on variational autoencoders:
-
-* *Separating model and inference*: Shakir [makes this point well](http://blog.shakirm.com/2015/03/a-statistical-view-of-deep-learning-ii-auto-encoders-and-free-energy/). Rather than being limited to an 'encoder' in neural net terms, we can think of the probability model at hand, $$ p(x, z) $$ separately from the approximate inference scheme. This lets us choose from a variety of methods, rather than thinking only in terms of amortized inference using a neural net. It is our choice whether to explore other (perhaps better) methods such as mean-field variational inference or MCMC/HMC/Langevin dynamics to learn the parameters of the model.
-* *Composability*: the moment we add a second layer of latent variables to our model that depend on the first layer, the encoder/decoder framework breaks down. How should we parametrize the inference network? Can we still do amortized inference? The framework of probability models can help us use build more complex models from basic building blocks, and gives us clear frameworks for how to do inference. Thinking in terms of encoders is dangerous for top-down inference, as it is unclear how to parametrize the encoder for any more than one layer of latent variables.
-* *Regularization is free*: in neural net terms, we discussed 'regularizer' term in the loss function (the KL divergence between the approximate posterior and prior). This comes out of the blue if one is not familiar with variational inference. But in probability model language, it is simply and alternate form of the ELBO, and we can immediately think about alternative priors that may be more appropriate for the data we wish to model.
-  &lt;p&gt;&lt;a href=&quot;/variational-autoencoder-perspectives/&quot;&gt;Variational Autoencoder Perspectives&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on July 24, 2016.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/fit-for-purpose/&quot;&gt;Fit for Purpose&lt;/a&gt; was originally published by Michael Bostwick at &lt;a href=&quot;&quot;&gt;Michael&lt;/a&gt; on May 15, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
-  <title type="html"><![CDATA[Tutorial - What is a variational autoencoder?]]></title>
-  <link rel="alternate" type="text/html" href="/what-is-variational-autoencoder-vae-tutorial/" />
-  <id>/what-is-variational-autoencoder-vae-tutorial</id>
-  <published>2016-07-18T00:00:00-04:00</published>
-  <updated>2016-07-18T00:00:00-04:00</updated>
+  <title type="html"><![CDATA[College Scorecard]]></title>
+  <link rel="alternate" type="text/html" href="/college-scorecard/" />
+  <id>/college-scorecard</id>
+  <published>2015-05-01T00:00:00-04:00</published>
+  <updated>2015-05-01T00:00:00-04:00</updated>
   <author>
-    <name>Jaan Altosaar</name>
+    <name>Michael Bostwick</name>
     <uri></uri>
-    <email>jaan@jaan.io</email>
+    <email></email>
   </author>
-  <content type="html">&lt;p&gt;Why do deep learning researchers and probabilistic machine learning folks get confused when discussing variational autoencoders? What is a variational autoencoder? Why is there unreasonable confusion surrounding this term?&lt;/p&gt;
+  <content type="html">&lt;p&gt;Contributed to data preparation for inaugural edition of College Scorecard.&lt;/p&gt;
 
-&lt;p&gt;There is a conceptual and language gap. The sciences of neural networks and probability models do not have a shared language. My goal is to bridge this idea gap and allow for more collaboration and discussion between these fields, and provide a consistent implementation (&lt;a href=&quot;https://github.com/altosaar/vae/blob/master/vae.py&quot;&gt;Github link&lt;/a&gt;).&lt;/p&gt;
-
-&lt;p&gt;Variational autoencoders are cool. They let us design complex generative models of data, and fit them to large datasets. They can generate images of fictional celebrity faces and high-resolution &lt;a href=&quot;http://blog.otoro.net/2016/04/01/generating-large-images-from-latent-vectors/&quot;&gt;digital artwork&lt;/a&gt;.&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&quot;/images/variational-autoencoder-faces.jpg&quot; style=&quot;max-width: 50%&quot; /&gt;
-    &lt;figcaption&gt;Fictional celebrity faces generated by a variational autoencoder (&lt;a href=&quot;https://www.youtube.com/watch?v=XNZIN7Jh3Sg&quot;&gt;by Alec Radford&lt;/a&gt;). &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;These models also yield state-of-the-art machine learning results in &lt;a href=&quot;https://arxiv.org/abs/1502.04623&quot;&gt;image generation&lt;/a&gt; and &lt;a href=&quot;https://arxiv.org/abs/1509.08731&quot;&gt;reinforcement learning&lt;/a&gt;. Variational autoencoders (VAEs) were defined in 2013 by &lt;a href=&quot;https://arxiv.org/abs/1312.6114&quot;&gt;Kingma et al.&lt;/a&gt; and &lt;a href=&quot;https://arxiv.org/abs/1401.4082&quot;&gt;Rezende et al.&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;How can we create a language for discussing variational autoencoders? Let’s think about them first using neural networks, then using variational inference in probability models.&lt;/p&gt;
-
-&lt;h3 id=&quot;the-neural-net-perspective&quot;&gt;The neural net perspective&lt;/h3&gt;
-
-&lt;p&gt;In neural net language, a variational autoencoder consists of an encoder, a decoder, and a loss function.&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&quot;/images/encoder-decoder.png&quot; /&gt;
-    &lt;figcaption&gt;The encoder compresses data into a latent space (z). The decoder reconstructs the data given the hidden representation.&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;The &lt;em&gt;encoder&lt;/em&gt; is a neural network. Its input is a datapoint &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;, its output is a hidden representation &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt;, and it has weights and biases &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt;. To be concrete, let’s say &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; is a 28 by 28-pixel photo of a handwritten number. The encoder ‘encodes’ the data which is &lt;script type=&quot;math/tex&quot;&gt;784&lt;/script&gt;-dimensional into a latent (hidden) representation space &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt;, which is much less than &lt;script type=&quot;math/tex&quot;&gt;784&lt;/script&gt; dimensions. This is typically referred to as a ‘bottleneck’ because the encoder must learn an efficient compression of the data into this lower-dimensional space. Let’s denote the encoder &lt;script type=&quot;math/tex&quot;&gt;q_\theta (z \vert x)&lt;/script&gt;. We note that the lower-dimensional space is stochastic: the encoder outputs parameters to &lt;script type=&quot;math/tex&quot;&gt;q_\theta (z \vert x)&lt;/script&gt;, which is a Gaussian probability density. We can sample from this distribution to get noisy values of the representations &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt;.&lt;/p&gt;
-
-&lt;p&gt;The &lt;em&gt;decoder&lt;/em&gt; is another neural net. Its input is the representation &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt;, it outputs the parameters to the probability distribution of the data, and has weights and biases &lt;script type=&quot;math/tex&quot;&gt;\phi&lt;/script&gt;. The decoder is denoted by &lt;script type=&quot;math/tex&quot;&gt;p_\phi(x\vert z)&lt;/script&gt;. Running with the handwritten digit example, let’s say the photos are black and white and represent each pixel as &lt;script type=&quot;math/tex&quot;&gt;0&lt;/script&gt; or &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;. The probability distribution of a single pixel can be then represented using a Bernoulli distribution. The decoder gets as input the latent representation of a digit &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; and outputs &lt;script type=&quot;math/tex&quot;&gt;784&lt;/script&gt; Bernoulli parameters, one for each of the &lt;script type=&quot;math/tex&quot;&gt;784&lt;/script&gt; pixels in the image. The decoder ‘decodes’ the real-valued numbers in &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; into &lt;script type=&quot;math/tex&quot;&gt;784&lt;/script&gt; real-valued numbers between &lt;script type=&quot;math/tex&quot;&gt;0&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;. Information is lost because it goes from a smaller to a larger dimensionality. How much information is lost? We measure this using the reconstruction log-likelihood &lt;script type=&quot;math/tex&quot;&gt;\log p_\phi (x\vert z)&lt;/script&gt; whose units are nats. This measure tells us how effectively the decoder has learned to reconstruct an input image &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; given its latent representation &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt;.&lt;/p&gt;
-
-&lt;p&gt;The &lt;em&gt;loss function&lt;/em&gt; of the variational autoencoder is the negative log-likelihood with a regularizer. Because there are no global representations that are shared by all datapoints, we can decompose the loss function into only terms that depend on a single datapoint &lt;script type=&quot;math/tex&quot;&gt;l_i&lt;/script&gt;. The total loss is then &lt;script type=&quot;math/tex&quot;&gt;\sum_{i=1}^N l_i&lt;/script&gt; for &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; total datapoints. The loss function &lt;script type=&quot;math/tex&quot;&gt;l_i&lt;/script&gt; for datapoint &lt;script type=&quot;math/tex&quot;&gt;x_i&lt;/script&gt; is:&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;l_i(\theta, \phi) = - E_{z\sim q_\theta(z\vert x_i)}[\log p_\phi(x_i\vert z)] + KL(q_\theta(z\vert x_i) \vert\vert p(z))&lt;/script&gt;
-
-&lt;p&gt;The first term is the reconstruction loss, or expected negative log-likelihood of the &lt;script type=&quot;math/tex&quot;&gt;i&lt;/script&gt;-th datapoint. The expectation is taken with respect to the encoder’s distribution over the representations. This term encourages the decoder to learn to reconstruct the data. If the decoder’s output does not reconstruct the data well, it will incur a large cost in this loss function.&lt;/p&gt;
-
-&lt;p&gt;The second term is a regularizer that we throw in (we’ll see how it’s derived later). This is the Kullback-Leibler divergence between the encoder’s distribution &lt;script type=&quot;math/tex&quot;&gt;q_\theta(z\vert x)&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;p(z)&lt;/script&gt;. This divergence measures how much information is lost (in units of nats) when using &lt;script type=&quot;math/tex&quot;&gt;q&lt;/script&gt; to represent &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt;. It is one measure of how close &lt;script type=&quot;math/tex&quot;&gt;q&lt;/script&gt; is to &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt;.&lt;/p&gt;
-
-&lt;p&gt;In the variational autoencoder, &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt; is specified as a standard Normal distribution with mean zero and variance one, or &lt;script type=&quot;math/tex&quot;&gt;p(z) = Normal(0,1)&lt;/script&gt;. If the encoder outputs representations &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; that are different than those from a standard normal distribution, it will receive a penalty in the loss. This regularizer term means ‘keep the representations &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; of each digit sufficiently diverse’. If we didn’t include the regularizer, the encoder could learn to cheat and give each datapoint a representation in a different region of Euclidean space. This is bad, because then two images of the same number (say a 2 written by different people, &lt;script type=&quot;math/tex&quot;&gt;2_{alice}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;2_{bob}&lt;/script&gt;) could end up with very different representations &lt;script type=&quot;math/tex&quot;&gt;z_{alice}, z_{bob}&lt;/script&gt;. We want the representation space of &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; to be meaningful, so we penalize this behavior. This has the effect of keeping similar numbers’ representations close together (e.g. so the representations of the digit two &lt;script type=&quot;math/tex&quot;&gt;{z_{alice}, z_{bob}, z_{ali}}&lt;/script&gt; remain sufficiently close).&lt;/p&gt;
-
-&lt;p&gt;We train the variational autoencoder using gradient descent to optimize the loss with respect to the parameters of the encoder and decoder &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\phi&lt;/script&gt;. For stochastic gradient descent with step size &lt;script type=&quot;math/tex&quot;&gt;\rho&lt;/script&gt;, the encoder parameters are updated using &lt;script type=&quot;math/tex&quot;&gt;\theta \leftarrow \theta - \rho \frac{\partial l}{\partial \theta}&lt;/script&gt; and the decoder is updated similarly.&lt;/p&gt;
-
-&lt;h3 id=&quot;the-probability-model-perspective&quot;&gt;The probability model perspective&lt;/h3&gt;
-
-&lt;p&gt;Now let’s think about variational autoencoders from a probability model perspective. Please forget everything you know about deep learning and neural networks for now. Thinking about the following concepts in isolation from neural networks will clarify things. At the very end, we’ll bring back neural nets.&lt;/p&gt;
-
-&lt;p&gt;In the probability model framework, a variational autoencoder contains a specific probability model of data &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; and latent variables &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt;. We can write the joint probability of the model as &lt;script type=&quot;math/tex&quot;&gt;p(x, z) = p(x \vert z) p(z)&lt;/script&gt;. The generative process can be written as follows.&lt;/p&gt;
-
-&lt;p&gt;For each datapoint &lt;script type=&quot;math/tex&quot;&gt;i&lt;/script&gt;:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Draw latent variables &lt;script type=&quot;math/tex&quot;&gt;z_i \sim p(z)&lt;/script&gt;&lt;/li&gt;
-  &lt;li&gt;Draw datapoint &lt;script type=&quot;math/tex&quot;&gt;x_i \sim p(x\vert z)&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;We can represent this as a graphical model:&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&quot;/images/graphical-model-variational-autoencoder.png&quot; width=&quot;50%&quot; height=&quot;40px&quot; style=&quot;max-width: 40%&quot; /&gt;
-    &lt;figcaption&gt;The graphical model representation of the model in the variational autoencoder. The latent variable z is a standard normal, and the data are drawn from p(x|z). The shaded node for X denotes observed data. For black and white images of handwritten digits, this data likelihood is Bernoulli distributed. &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;This is the central object we think about when discussing variational autoencoders from a probability model perspective. The latent variables are drawn from a prior &lt;script type=&quot;math/tex&quot;&gt;p(z)&lt;/script&gt;. The data &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; have a likelihood &lt;script type=&quot;math/tex&quot;&gt;p(x \vert z)&lt;/script&gt; that is conditioned on latent variables &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt;. The model defines a joint probability distribution over data and latent variables: &lt;script type=&quot;math/tex&quot;&gt;p(x, z)&lt;/script&gt;. We can decompose this into the likelihood and prior: &lt;script type=&quot;math/tex&quot;&gt;p(x,z) = p(x\vert z)p(z)&lt;/script&gt;. For black and white digits, the likelihood is Bernoulli distributed.&lt;/p&gt;
-
-&lt;p&gt;Now we can think about inference in this model. The goal is to infer good values of the latent variables given observed data, or to calculate the posterior &lt;script type=&quot;math/tex&quot;&gt;p(z \vert x)&lt;/script&gt;. Bayes says:&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;p(z \vert x) = \frac{p(x \vert z)p(z)}{p(x)}.&lt;/script&gt;
-
-&lt;p&gt;Examine the denominator &lt;script type=&quot;math/tex&quot;&gt;p(x)&lt;/script&gt;. This is called the evidence, and we can calculate it by marginalizing out the latent variables: &lt;script type=&quot;math/tex&quot;&gt;p(x) = \int p(x \vert z) p(z) dz&lt;/script&gt;. Unfortunately, this integral requires exponential time to compute as it needs to be evaluated over all configurations of latent variables. We therefore need to approximate this posterior distribution.&lt;/p&gt;
-
-&lt;p&gt;Variational inference approximates the posterior with a family of distributions &lt;script type=&quot;math/tex&quot;&gt;q_\lambda(z \vert x)&lt;/script&gt;. The variational parameter &lt;script type=&quot;math/tex&quot;&gt;\lambda&lt;/script&gt; indexes the family of distributions. For example, if &lt;script type=&quot;math/tex&quot;&gt;q&lt;/script&gt; were Gaussian, it would be the mean and variance of the latent variables for each datapoint &lt;script type=&quot;math/tex&quot;&gt;\lambda_{x_i} = (\mu_{x_i}, \sigma^2_{x_i}))&lt;/script&gt;.&lt;/p&gt;
-
-&lt;p&gt;How can we know how well our variational posterior &lt;script type=&quot;math/tex&quot;&gt;q(z \vert x)&lt;/script&gt; approximates the true posterior &lt;script type=&quot;math/tex&quot;&gt;p(z \vert x)&lt;/script&gt;? We can use the Kullback-Leibler divergence, which measures the information lost when using &lt;script type=&quot;math/tex&quot;&gt;q&lt;/script&gt; to approximate &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt; (in units of nats):&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;KL(q_\lambda(z \vert x) \vert \vert p(z \vert x)) =&lt;/script&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\mathbf{E}_q[\log q_\lambda(z \vert x)]- \mathbf{E}_q[\log p(x, z)] + \log p(x)&lt;/script&gt;
-
-&lt;p&gt;Our goal is to find the variational parameters &lt;script type=&quot;math/tex&quot;&gt;\lambda&lt;/script&gt; that minimize this divergence. The optimal approximate posterior is thus&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;q_\lambda^* (z \vert x) = {\arg\min}_\lambda KL(q_\lambda(z \vert x) \vert \vert p(z \vert x)).&lt;/script&gt;
-
-&lt;p&gt;Why is this impossible to compute directly? The pesky evidence &lt;script type=&quot;math/tex&quot;&gt;p(x)&lt;/script&gt; appears in the divergence. This is intractable as discussed above. We need one more ingredient for tractable variational inference. Consider the following function:&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;ELBO(\lambda) = \mathbf{E}_q[\log p(x, z)] - \mathbf{E}_q[\log q_\lambda(z \vert x)].&lt;/script&gt;
-
-&lt;p&gt;Notice that we can combine this with the Kullback-Leibler divergence and rewrite the evidence as&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\log p(x) = ELBO(\lambda) + KL(q_\lambda(z \vert x) \vert \vert p(z \vert x))&lt;/script&gt;
-
-&lt;p&gt;By Jensen’s inequality, the Kullback-Leibler divergence is always greater than or equal to zero. This means that minimizing the Kullback-Leibler divergence is equivalent to maximizing the ELBO. The abbreviation is revealed: the Evidence Lower BOund allows us to do approximate posterior inference. We are saved from having to compute and minimize the Kullback-Leibler divergence between the approximate and exact posteriors. Instead, we can maximize the ELBO which is equivalent (but computationally tractable).&lt;/p&gt;
-
-&lt;p&gt;In the variational autoencoder model, there are only local latent variables (no datapoint shares its latent &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; with the latent variable of another datapoint). So we can decompose the ELBO into a sum where each term depends on a single datapoint. This allows us to use stochastic gradient descent with respect to the parameters &lt;script type=&quot;math/tex&quot;&gt;\lambda&lt;/script&gt;. The ELBO for a single datapoint in the variational autoencoder is:&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;ELBO_i(\lambda) = E_{q_\lambda(z\vert x_i)}[\log p(x_i\vert z)] - KL(q_\lambda(z\vert x_i) \vert\vert p(z)).&lt;/script&gt;
-
-&lt;p&gt;To see that this is equivalent to our previous definition of the ELBO, expand the log joint into the prior and likelihood terms and use the product rule for the logarithm.&lt;/p&gt;
-
-&lt;p&gt;Let’s make the connection to neural net language. The final step is to parametrize the approximate posterior &lt;script type=&quot;math/tex&quot;&gt;q_\theta (z \vert x, \lambda)&lt;/script&gt; with an &lt;em&gt;inference network&lt;/em&gt; (or encoder) that takes as input data &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; and outputs parameters &lt;script type=&quot;math/tex&quot;&gt;\lambda&lt;/script&gt;. We parametrize the likelihood &lt;script type=&quot;math/tex&quot;&gt;p(x \vert z)&lt;/script&gt; with a &lt;em&gt;generative network&lt;/em&gt; (or decoder) that takes latent variables and outputs parameters to the data distribution &lt;script type=&quot;math/tex&quot;&gt;p_\phi(x \vert z)&lt;/script&gt;. The inference and generative networks have parameters &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\phi&lt;/script&gt; respectively. The parameters are typically the weights and biases of the neural nets. We optimize these to maximize the ELBO using stochastic gradient descent (there are no global latent variables, so it is kosher to minibatch our data). We can write the ELBO and include the inference and generative network parameters as:&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;ELBO_i(\theta, \phi) = E_{q_\theta(z\vert x_i)}[\log p_\phi(x_i\vert z)] - KL(q_\theta(z\vert x_i) \vert\vert p(z)).&lt;/script&gt;
-
-&lt;p&gt;This evidence lower bound is the negative of the loss function for variational autoencoders we discussed from the neural net perspective; &lt;script type=&quot;math/tex&quot;&gt;ELBO_i(\theta, \phi) = -l_i(\theta, \phi)&lt;/script&gt;. However, we arrived at it from principled reasoning about probability models and approximate posterior inference. We can still interpret the Kullback-Leibler divergence term as a regularizer, and the expected likelihood term as a reconstruction ‘loss’. But the probability model approach makes clear why these terms exist: to minimize the Kullback-Leibler divergence between the approximate posterior &lt;script type=&quot;math/tex&quot;&gt;q_\lambda(z \vert x)&lt;/script&gt; and model posterior &lt;script type=&quot;math/tex&quot;&gt;p(z \vert x)&lt;/script&gt;.&lt;/p&gt;
-
-&lt;p&gt;That’s it! We have defined a probability model, an objective function (the ELBO), and an inference algorithm (gradient ascent on the ELBO).&lt;/p&gt;
-
-&lt;h3 id=&quot;experiments&quot;&gt;Experiments&lt;/h3&gt;
-
-&lt;p&gt;Now we are ready to look at samples from the model. We have two choices to measure progress: sampling from the prior or the posterior. To give us a better idea of how to interpret the learned latent space, we can visualize what the posterior distribution of the latent variables &lt;script type=&quot;math/tex&quot;&gt;q_\lambda(z \vert x)&lt;/script&gt; looks like.&lt;/p&gt;
-
-&lt;p&gt;Computationally, this means feeding an input image &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; through the inference network to get the parameters of the Normal distribution, then taking a sample of the latent variable &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt;. We can plot this during training to see how the inference network learns to better approximate the posterior distribution, and place the latent variables for the different classes of digits in different parts of the latent space. Note that at the start of training, the distribution of latent variables is close to the prior (a round blob around &lt;script type=&quot;math/tex&quot;&gt;0&lt;/script&gt;).&lt;/p&gt;
-
-&lt;center&gt;
-&lt;iframe src=&quot;//giphy.com/embed/26ufoVqZDjHoPrp8k?html5=true&quot; width=&quot;480&quot; height=&quot;413&quot; frameborder=&quot;0&quot; class=&quot;giphy-embed&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;/center&gt;
-
-&lt;figure&gt;
-    &lt;figcaption&gt;Visualizing the learned approximate posterior during training. As training progresses the digit classes become differentiated in the two-dimensional latent space. &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;We can also visualize the prior predictive distribution. We fix the values of the latent variables to be equally spaced between &lt;script type=&quot;math/tex&quot;&gt;-3&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt;. Then we can take samples from the likelihood parametrized by the generative network. These ‘hallucinated’ images show us what the model associates with each part of the latent space.&lt;/p&gt;
-
-&lt;center&gt;
-&lt;iframe src=&quot;//giphy.com/embed/26ufgj5LH3YKO1Zlu?html5=true&quot; width=&quot;480&quot; height=&quot;480&quot; frameborder=&quot;0&quot; class=&quot;giphy-embed&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;/center&gt;
-
-&lt;figure&gt;
-    &lt;figcaption&gt;Visualizing the prior predictive distribution by looking at samples of the likelihood. The x and y-axes represent equally spaced latent variable values between -3 and 3 (in two dimensions). &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;h3 id=&quot;glossary&quot;&gt;Glossary&lt;/h3&gt;
-
-&lt;p&gt;We need to decide on the language used for discussing variational autoencoders in a clear and concise way. Here is a glossary of terms I’ve found confusing:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Variational Autoencoder (VAE)&lt;/strong&gt;: in neural net language, a VAE consists of an encoder, a decoder, and a loss function. In probability model terms, the variational autoencoder refers to approximate inference in a latent Gaussian model where the approximate posterior and model likelihood are parametrized by neural nets (the inference and generative networks).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Loss function&lt;/strong&gt;: in neural net language, we think of loss functions. Training means minimizing these loss functions. But in variational inference, we maximize the &lt;strong&gt;ELBO&lt;/strong&gt; (which is not a loss function). This leads to awkwardness like calling &lt;code&gt;optimizer.minimize(-elbo)&lt;/code&gt; as optimizers in neural net frameworks only support minimization.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Encoder&lt;/strong&gt;: in the neural net world, the encoder is a neural network that outputs a representation &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; of data &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;. In probability model terms, the &lt;strong&gt;inference network&lt;/strong&gt; parametrizes the approximate posterior of the latent variables &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt;. The inference network outputs parameters to the distribution &lt;script type=&quot;math/tex&quot;&gt;q(z \vert x)&lt;/script&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Decoder&lt;/strong&gt;: in deep learning, the decoder is a neural net that learns to reconstruct the data &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; given a representation &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt;. In terms of probability models, the likelihood of the data &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; given latent variables &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; is parametrized by a &lt;strong&gt;generative network&lt;/strong&gt;. The generative network outputs parameters to the likelihood distribution &lt;script type=&quot;math/tex&quot;&gt;p(x \vert z)&lt;/script&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Local latent variables&lt;/strong&gt;: these are the &lt;script type=&quot;math/tex&quot;&gt;z_i&lt;/script&gt; for each datapoint &lt;script type=&quot;math/tex&quot;&gt;x_i&lt;/script&gt;. There are no global latent variables. Because there are only local latent variables, we can easily decompose the ELBO into terms &lt;script type=&quot;math/tex&quot;&gt;\mathcal{L}_i&lt;/script&gt; that depend only on a single datapoint &lt;script type=&quot;math/tex&quot;&gt;x_i&lt;/script&gt;. This enables stochastic gradient descent.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Mean-field versus amortized inference&lt;/strong&gt;: in mean-field variational inference, we have parameters for each datapoint &lt;script type=&quot;math/tex&quot;&gt;\lambda_i&lt;/script&gt; (e.g. &lt;script type=&quot;math/tex&quot;&gt;\lambda_i = (\mu_i, \sigma_i)&lt;/script&gt; for Gaussian latent variables). In the variational autoencoder setting, we do &lt;strong&gt;amortized inference&lt;/strong&gt; where there is a set of global parameters (in this case, the parameters &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt; of the inference network). These global parameters are shared across all datapoints.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Inference&lt;/strong&gt;: in neural nets, inference usually means prediction of latent representations given new, never-before-seen datapoints. In probability models, inference refers to inferring the values of latent variables given observed data.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;sample-implementation&quot;&gt;Sample implementation&lt;/h3&gt;
-
-&lt;p&gt;Here is a simple implementation that was used to generate the figures in this post: &lt;a href=&quot;https://github.com/altosaar/vae/blob/master/vae.py&quot;&gt;Github link&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;footnote-the-reparametrization-trick&quot;&gt;Footnote: the reparametrization trick&lt;/h3&gt;
-
-&lt;p&gt;The final thing we need to implement the variational autoencoder is how to take derivatives with respect to the parameters of a stochastic variable. If we are given &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; that is drawn from a distribution &lt;script type=&quot;math/tex&quot;&gt;q_\theta (z \vert x)&lt;/script&gt;, and we want to take derivatives of a function of &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; with respect to &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt;, how do we do that? The &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; sample is fixed, but intuitively its derivative should be nonzero.&lt;/p&gt;
-
-&lt;p&gt;For some distributions, it is possible to reparametrize samples in a clever way, such that the stochasticity is independent of the parameters. We want our samples to deterministically depend on the parameters of the distribution. For example, in a normally-distributed variable with mean &lt;script type=&quot;math/tex&quot;&gt;\mu&lt;/script&gt; and standard devation &lt;script type=&quot;math/tex&quot;&gt;\sigma&lt;/script&gt;, we can sample from it like this:&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;z = \mu + \sigma \odot \epsilon,&lt;/script&gt;
-
-&lt;p&gt;where &lt;script type=&quot;math/tex&quot;&gt;\epsilon \sim Normal(0, 1)&lt;/script&gt;. Going from &lt;script type=&quot;math/tex&quot;&gt;\sim&lt;/script&gt; denoting a draw from the distribution to the equals sign &lt;script type=&quot;math/tex&quot;&gt;=&lt;/script&gt; is the crucial step. We have defined a function that depends on on the parameters deterministically. We can thus take derivatives of functions involving &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt;, &lt;script type=&quot;math/tex&quot;&gt;f(z)&lt;/script&gt; with respect to the parameters of its distribution &lt;script type=&quot;math/tex&quot;&gt;\mu&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\sigma&lt;/script&gt;.&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&quot;/images/reparametrization.png&quot; /&gt;
-    &lt;figcaption&gt;The reparametrization trick allows us to push the randomness of a normally-distributed random variable z into epsilon, which is sampled from a standard normal. Diamonds indicate deterministic dependencies, circles indicate random variables. &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;In the variational autoencoder, the mean and variance are output by an inference network with parameters &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt; that we optimize. The reparametrization trick lets us backpropagate (take derivatives using the chain rule) with respect to &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt; through the objective (the ELBO) which is a function of samples of the latent variables &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;references-for-ideas-and-figures&quot;&gt;References for ideas and figures&lt;/h3&gt;
-
-&lt;p&gt;Many ideas and figures are from Shakir Mohamed’s excellent blog posts on the &lt;a href=&quot;http://blog.shakirm.com/2015/10/machine-learning-trick-of-the-day-4-reparameterisation-tricks/&quot;&gt;reparametrization trick&lt;/a&gt; and &lt;a href=&quot;http://blog.shakirm.com/2015/03/a-statistical-view-of-deep-learning-ii-auto-encoders-and-free-energy/&quot;&gt;autoencoders&lt;/a&gt;.
-Durk Kingma created the great visual of the &lt;a href=&quot;http://dpkingma.com/?page_id=277&quot;&gt;reparametrization trick&lt;/a&gt;. Great references for variational inference are this &lt;a href=&quot;https://arxiv.org/abs/1601.00670&quot;&gt;tutorial&lt;/a&gt; and David Blei’s &lt;a href=&quot;https://www.cs.princeton.edu/courses/archive/fall11/cos597C/lectures/variational-inference-i.pdf&quot;&gt;course notes&lt;/a&gt;. Dustin Tran has a helpful blog post on &lt;a href=&quot;http://dustintran.com/blog/denoising-criterion-for-variational-auto-encoding-framework/&quot;&gt;variational autoencoders&lt;/a&gt;. The header’s MNIST gif is from &lt;a href=&quot;https://github.com/RuiShu/variational-autoencoder&quot;&gt;Rui Shu&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Thanks to Rajesh Ranganath, Ben Poole, Cassandra Xia, and Ryan Sepassi for discussions and many concepts in this article.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Discussion on &lt;a href=&quot;https://news.ycombinator.com/edit?id=12292576&quot;&gt;Hacker News&lt;/a&gt; and &lt;a href=&quot;https://www.reddit.com/r/MachineLearning/comments/4xv5b5/explainer_of_variational_autoencoders_from_a/&quot;&gt;Reddit&lt;/a&gt;. Featured in David Duvenaud’s course syllabus on &lt;a href=&quot;http://www.cs.toronto.edu/~duvenaud/courses/csc2541/&quot;&gt;“Differentiable inference and generative models”&lt;/a&gt;.&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;/what-is-variational-autoencoder-vae-tutorial/&quot;&gt;Tutorial - What is a variational autoencoder?&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on July 18, 2016.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Word embedding models for music analysis]]></title>
-  <link rel="alternate" type="text/html" href="/word-embedding-music/" />
-  <id>/word-embedding-music</id>
-  <published>2016-07-02T00:00:00-04:00</published>
-  <updated>2016-07-02T00:00:00-04:00</updated>
-  <author>
-    <name>Jaan Altosaar</name>
-    <uri></uri>
-    <email>jaan@jaan.io</email>
-  </author>
-  <content type="html">&lt;p&gt;We use word2vec to analyze classical music and show that as composers use more dissonance, the principal components of chords on the circle of fifths become less circular.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.eamonnbell.com/&quot;&gt;Eamonn Bell&lt;/a&gt;, Jaan Altosaar. Word embedding models applied to classical music recover the circle of fifths in embedding space. &lt;a href=&quot;https://sites.google.com/site/ml4md2016/program&quot;&gt;ICML Music Discovery 2016&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/papers/2016_Bell-Altosaar_word2vec-Music.pdf&quot;&gt;&lt;i class=&quot;fa fa-file-pdf-o&quot;&gt;&lt;/i&gt; PDF&lt;/a&gt; &lt;a href=&quot;https://github.com/eamonnbell/music-mining&quot;&gt;&lt;i class=&quot;fa fa-github&quot;&gt;&lt;/i&gt; Github&lt;/a&gt; &lt;a href=&quot;https://docs.google.com/presentation/d/1awRWuhEkkBlhk5NcloLtXKCDYkqdM-FdnPceXPP2XLk/edit?usp=sharing&quot;&gt;&lt;i class=&quot;fa fa-line-chart&quot;&gt;&lt;/i&gt; Slides&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;/word-embedding-music/&quot;&gt;Word embedding models for music analysis&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on July 02, 2016.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Frustrated Spin Ice]]></title>
-  <link rel="alternate" type="text/html" href="/spin-ice/" />
-  <id>/spin-ice</id>
-  <published>2016-01-01T00:00:00-05:00</published>
-  <updated>2016-01-01T00:00:00-05:00</updated>
-  <author>
-    <name>Jaan Altosaar</name>
-    <uri></uri>
-    <email>jaan@jaan.io</email>
-  </author>
-  <content type="html">&lt;p&gt;We studied a pyrochloric oxide and showed that it has quantum behavior, which is surprising as it is considered a material with only classical effects. &lt;em&gt;Featured&lt;/em&gt; on the &lt;a href=&quot;https://journals.aps.org/prb/kaleidoscope/prb/93/2/024402&quot;&gt;PRB front page&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;P. Henelius, T. Lin, M. Enjalran, Z. Hao, J. Altosaar, P. Henelius, F. Flicker, T. Yavors’kii, and M. J. P. Gingras. Refrustration and Competing Orders in a Spin Ice Material, &lt;a href=&quot;https://journals.aps.org/prb/kaleidoscope/prb/93/2/024402&quot;&gt;Phys. Rev. B. (2016)&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/papers/2015_Henelius-Lin-Enjalran-Hao-Rau-Altosaar-Flicker-Yavorskii-Gingras_Refrustration.pdf&quot;&gt;&lt;i class=&quot;fa fa-file-pdf-o&quot;&gt;&lt;/i&gt; PDF&lt;/a&gt; &lt;a href=&quot;http://arxiv.org/abs/1512.05361&quot;&gt;&lt;i class=&quot;fa fa-institution&quot;&gt;&lt;/i&gt; arXiv&lt;/a&gt; &lt;a href=&quot;https://github.com/altosaar/CumulantExpander&quot;&gt;&lt;i class=&quot;fa fa-github&quot;&gt;&lt;/i&gt; Github&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;/spin-ice/&quot;&gt;Frustrated Spin Ice&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on January 01, 2016.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Experiments in information overload]]></title>
-  <link rel="alternate" type="text/html" href="/info-overload/" />
-  <id>/info-overload</id>
-  <published>2015-11-27T00:00:00-05:00</published>
-  <updated>2015-11-27T00:00:00-05:00</updated>
-  <author>
-    <name>Jaan Altosaar</name>
-    <uri></uri>
-    <email>jaan@jaan.io</email>
-  </author>
-  <content type="html">&lt;p&gt;Why read clickbait over longform journalism? Why use Facebook so much?&lt;/p&gt;
-
-&lt;p&gt;Screentime is bad, but the &lt;a href=&quot;http://www.tristanharris.com/essays/&quot;&gt;attention economy&lt;/a&gt; incentivizes our addiction.&lt;/p&gt;
-
-&lt;p&gt;I’m trying to reduce information overload. Here are some methods I’ve used for a while.&lt;/p&gt;
-
-&lt;p&gt;Thoughts on benefits, pitfalls, and other ideas? Hit me up at &lt;a href=&quot;mailto:j@jaan.io&quot;&gt;j@jaan.io&lt;/a&gt;. I’ll keep this updated.&lt;/p&gt;
-
-&lt;p&gt;The current list:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;No news except for the Harper’s &lt;a href=&quot;http://harpers.org/blog/category/weekly-review/&quot;&gt;Weekly Review&lt;/a&gt; every Tuesday.&lt;/li&gt;
-  &lt;li&gt;Two devices: a ‘work’ laptop and an ‘email/distraction’ device (Macbook Air and iPad).&lt;/li&gt;
-  &lt;li&gt;On the work laptop, permanently block Gmail and any distracting sites (using &lt;a href=&quot;https://selfcontrolapp.com/&quot;&gt;SelfControl&lt;/a&gt; with &lt;a href=&quot;https://github.com/SelfControlApp/selfcontrol/wiki/Tweaking-Max-Block-Length-and-Block-Length-Interval&quot;&gt;extended block lengths&lt;/a&gt;).&lt;/li&gt;
-  &lt;li&gt;Looking at &lt;a href=&quot;http://rescuetime.com/&quot;&gt;Rescuetime&lt;/a&gt; logs every week and updating my SelfControl blacklist with distracting websites.&lt;/li&gt;
-  &lt;li&gt;No TV, and about five movies per year. If I’m forced to watch movies/TV/other media, watch it at 2x (it’s a bit harder to follow at first on these faster speeds; start at 1.5x and work your way up). Ditto for podcasts and lectures: 2x saves a lot of time with little loss in retention.&lt;/li&gt;
-  &lt;li&gt;Every few months: skimming the top 20 posts of each day on &lt;a href=&quot;http://news.ycombinator.com/&quot;&gt;Hacker News&lt;/a&gt; using &lt;a href=&quot;http://hckrnews.com/&quot;&gt;HckrNews&lt;/a&gt;. Interesting links go to Instapaper. Doing this in batches helps filter useful things from hype cycle fare.&lt;/li&gt;
-  &lt;li&gt;Once a year: skim RSS feeds using Feedly, save to Instapaper. I like &lt;a href=&quot;http://longform.org/&quot;&gt;Longform&lt;/a&gt;’s curation service of high quality long-form journalism and essays.&lt;/li&gt;
-  &lt;li&gt;Many tricks from &lt;a href=&quot;https://medium.com/@jgvandehey/this-is-your-brain-on-mobile-15308056cfae&quot;&gt;‘This is your brain on mobile’&lt;/a&gt; like no phone notifications and no social media apps.&lt;/li&gt;
-  &lt;li&gt;Using a pay-as-you-go &lt;a href=&quot;https://www.ptel.com/plans/pg&quot;&gt;phone plan&lt;/a&gt;. Combined with Google Voice, this is cheap and the 10c/MB data keeps me off mobile internet unless necessary (like maps when out).&lt;/li&gt;
-  &lt;li&gt;On Facebook, systematically unfollowing everyone in the newsfeed (this took an hour of clicking, but was &lt;a href=&quot;http://www.newyorker.com/tech/elements/how-facebook-makes-us-unhappy&quot;&gt;well worth it&lt;/a&gt;). An empty newsfeed is revelatory: if I’m truly interested in someone, I’ll go to their profile page or use the graph search tool.&lt;/li&gt;
-  &lt;li&gt;Leaving all devices at work as often as possible. Then I’m totally disconnected and forced to read, &lt;a href=&quot;http://chronicle.com/article/The-End-of-Solitude/3708&quot;&gt;be alone&lt;/a&gt;, and &lt;a href=&quot;http://www.nytimes.com/2014/08/10/opinion/sunday/hit-the-reset-button-in-your-brain.html&quot;&gt;take a real break&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;For complete blocking of ambient noise, 3M Peltor &lt;a href=&quot;http://www.amazon.com/gp/product/B00009LI4K/&quot;&gt;industrial earmuffs&lt;/a&gt; over in-ear &lt;a href=&quot;http://www.amazon.com/RBH-EP-2-Earphones/dp/B00H7LAJQA&quot;&gt;headphones&lt;/a&gt; give the most reduction I’ve found in crowded NYC subways.&lt;/li&gt;
-  &lt;li&gt;Tara Brach’s &lt;a href=&quot;http://www.tarabrach.com/audioarchives-guided-meditations.html&quot;&gt;guided meditations&lt;/a&gt; and podcasts are awesome for &lt;a href=&quot;http://www.scientificamerican.com/article/mental-downtime/&quot;&gt;downtime&lt;/a&gt; and self-therapy during the week.&lt;/li&gt;
-  &lt;li&gt;Making all desktop backgrounds pictures of your aged face (through an &lt;a href=&quot;http://faceretirement.merrilledge.com/&quot;&gt;app&lt;/a&gt;). This can add immediacy and help you make better decisions.&lt;/li&gt;
-  &lt;li&gt;Using &lt;a href=&quot;https://chrome.google.com/webstore/detail/calendar-and-countdown/caplfhpahpkhhckglldpmdmjclabckhc?hl=en&quot;&gt;countdown apps&lt;/a&gt; to keep the number of &lt;em&gt;days&lt;/em&gt; to a big deadline visible every day. This can help connect your present self to your future self.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;benefits-and-pitfalls&quot;&gt;Benefits and pitfalls&lt;/h3&gt;
-
-&lt;p&gt;When stuck I’m forced to go to lame sites (the interesting ones like Gmail and Hacker News are blocked). I can’t New Tab away from boredom and have to sit with the discomfort.&lt;/p&gt;
-
-&lt;p&gt;I’m getting better staying with this existential fear-of-failure crisis of ‘I’m stuck’. Paying attention to the discomfort helps; eventually it dissipates and interesting ideas appear. But this doesn’t happen if I’m constantly checking emails, sites, or phone notifications.&lt;/p&gt;
-
-&lt;p&gt;Severely limiting my information intake means I read more and get bored more often. It takes a few days to hear about big news sometimes.&lt;/p&gt;
-
-&lt;p&gt;How could information filtering be applied to the physical world? I’d love to see the collections at the Met, MoMA, and other NYC museums, but there is no time. I need a recommendation system for this equivalent to Instapaper or Longform. Museum collections and physical things do not have a ‘save for later’ feature. Adblock for the real world isn’t here yet (c.f. augmented reality circa 2020). Meanwhile, can we mentally train to avoid advertising?&lt;/p&gt;
-
-&lt;p&gt;If everyone used these weird hacks, no one would make money online and there would be no one to upvote things on Hacker News or Reddit; no one to ‘like’. These techniques might leave me more (or less) susceptible to &lt;a href=&quot;http://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles&quot;&gt;filter bubbles&lt;/a&gt;, but it’s a fun experiment.&lt;/p&gt;
-
-&lt;p&gt;Could recommendation systems be the solution to these issues? Would this accentuate the problem? Is there even a problem, or is this part of the &lt;a href=&quot;http://www.economist.com/news/christmas-specials/21636612-time-poverty-problem-partly-perception-and-partly-distribution-why&quot;&gt;‘busy’&lt;/a&gt; &lt;a href=&quot;http://opinionator.blogs.nytimes.com/2012/06/30/the-busy-trap/&quot;&gt;trap&lt;/a&gt;?&lt;/p&gt;
-
-&lt;p&gt;Do let me know about alternative ideas or things to try at &lt;a href=&quot;mailto:j@jaan.io&quot;&gt;j@jaan.io&lt;/a&gt;!&lt;/p&gt;
-
-&lt;h3 id=&quot;related-reading&quot;&gt;Related reading&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://lareviewofbooks.org/article/entertain-yourself/#!&quot;&gt;Stuart Whatley&lt;/a&gt; on how smartphones cause anxiety and the psychology of boredom.&lt;/li&gt;
-&lt;/ul&gt;
-
-  &lt;p&gt;&lt;a href=&quot;/info-overload/&quot;&gt;Experiments in information overload&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on November 27, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Useful Science]]></title>
-  <link rel="alternate" type="text/html" href="/useful-science/" />
-  <id>/useful-science</id>
-  <published>2015-11-26T00:00:00-05:00</published>
-  <updated>2015-11-26T00:00:00-05:00</updated>
-  <author>
-    <name>Jaan Altosaar</name>
-    <uri></uri>
-    <email>jaan@jaan.io</email>
-  </author>
-  <content type="html">&lt;p&gt;One sentence summaries of science to improve your life (incl. &lt;a href=&quot;http://www.usefulscience.org/podcast&quot;&gt;podcast&lt;/a&gt;). Live at &lt;a href=&quot;http://www.usefulscience.org&quot;&gt;usefulscience.org&lt;/a&gt;. I helped write an &lt;a href=&quot;https://theconversation.com/accurate-science-or-accessible-science-in-the-media-why-not-both-59871&quot;&gt;editorial&lt;/a&gt; about our mission.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Featured&lt;/em&gt; on various news websites; ‘received funding’ on CBC Television’s Dragons’ Den (&lt;a href=&quot;https://drive.google.com/file/d/0B1auAcbZIBoTVFRQdFBNQXRDY2s/view?usp=sharing&quot;&gt;link to episode&lt;/a&gt;).&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;/useful-science/&quot;&gt;Useful Science&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on November 26, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Correlated LDA]]></title>
-  <link rel="alternate" type="text/html" href="/correlated-LDA/" />
-  <id>/correlated-LDA</id>
-  <published>2015-09-09T00:00:00-04:00</published>
-  <updated>2015-09-09T00:00:00-04:00</updated>
-  <author>
-    <name>Jaan Altosaar</name>
-    <uri></uri>
-    <email>jaan@jaan.io</email>
-  </author>
-  <content type="html">&lt;p&gt;Goal: discover how articles in the humanities discuss concepts differently from the sciences.&lt;/p&gt;
-
-&lt;p&gt;Jingwei Zhang, Aaron Gerow, Jaan Altosaar, James Evans, Richard Jean So. Fast, Flexible Models for Discovering Topic Correlation across Weakly-Related Collections, &lt;a href=&quot;https://www.cs.cmu.edu/~ark/EMNLP-2015/index.html&quot;&gt;EMNLP 2015&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/papers/2015_Zhang-Gerow-Altosaar-Evans-So_Correlated-LDA.pdf&quot;&gt;&lt;i class=&quot;fa fa-file-pdf-o&quot;&gt;&lt;/i&gt; PDF&lt;/a&gt; &lt;a href=&quot;http://arxiv.org/abs/1508.04562&quot;&gt;&lt;i class=&quot;fa fa-institution&quot;&gt;&lt;/i&gt; arXiv&lt;/a&gt; &lt;a href=&quot;https://github.com/iceboal/correlated-lda&quot;&gt;&lt;i class=&quot;fa fa-github&quot;&gt;&lt;/i&gt; Github&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;/correlated-LDA/&quot;&gt;Correlated LDA&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on September 09, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[MusicMappr]]></title>
-  <link rel="alternate" type="text/html" href="/mapping-music/" />
-  <id>/mapping-music</id>
-  <published>2014-12-28T00:00:00-05:00</published>
-  <updated>2014-12-28T00:00:00-05:00</updated>
-  <author>
-    <name>Jaan Altosaar</name>
-    <uri></uri>
-    <email>jaan@jaan.io</email>
-  </author>
-  <content type="html">&lt;p&gt;Enable anyone to make a beat in 30 seconds, using machine learning in JavaScript. &lt;em&gt;Press!&lt;/em&gt; Interviewed and live demo featured on &lt;a href=&quot;http://www.thewire.co.uk/in-writing/interviews/play-the-musicmappr-sampling-app&quot;&gt;The Wire&lt;/a&gt; magazine!&lt;/p&gt;
-
-&lt;p&gt;Ethan Benjamin, Jaan Altosaar. MusicMapper: Interactive 2D representations of music samples for in-browser remixing and exploration, &lt;a href=&quot;http://www.nime.org/wp-publications/jaltosaar2015/&quot;&gt;NIME 2015&lt;/a&gt;, Louisiana State University, 2015.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/papers/2015_Benjamin-Altosaar_MusicMapper.pdf&quot;&gt;&lt;i class=&quot;fa fa-file-pdf-o&quot;&gt;&lt;/i&gt; PDF&lt;/a&gt;  &lt;a href=&quot;https://github.com/fatsmcgee/MusicMappr&quot;&gt;&lt;i class=&quot;fa fa-github&quot;&gt;&lt;/i&gt; Github&lt;/a&gt;  &lt;a href=&quot;https://www.youtube.com/watch?v=mvD6e1uiO8k&quot;&gt;&lt;i class=&quot;fa fa-youtube-play&quot;&gt;&lt;/i&gt; YouTube demo&lt;/a&gt;  &lt;a href=&quot;http://fatsmcgee.github.io/MusicMappr/&quot;&gt;&lt;i class=&quot;fa fa-laptop&quot;&gt;&lt;/i&gt; Live demo&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;/mapping-music/&quot;&gt;MusicMappr&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on December 28, 2014.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Fish Music]]></title>
-  <link rel="alternate" type="text/html" href="/fish-music/" />
-  <id>/fish-music</id>
-  <published>2014-12-28T00:00:00-05:00</published>
-  <updated>2014-12-28T00:00:00-05:00</updated>
-  <author>
-    <name>Jaan Altosaar</name>
-    <uri></uri>
-    <email>jaan@jaan.io</email>
-  </author>
-  <content type="html">&lt;p&gt;Can we convey how fish move using generative music and computer vision?&lt;/p&gt;
-
-&lt;p&gt;Andrew Mercer-Taylor, Jaan Altosaar. Sonification of Fish Movement Using Pitch Mesh Pairs, New Interfaces For Musical Expression, Louisiana State University, 2015.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/papers/2015_Mercer-Taylor-Altosaar_Fish-Music.pdf&quot;&gt;&lt;i class=&quot;fa fa-file-pdf-o&quot;&gt;&lt;/i&gt; PDF&lt;/a&gt;  &lt;a href=&quot;https://github.com/andrewjmt/fishmusic&quot;&gt;&lt;i class=&quot;fa fa-github&quot;&gt;&lt;/i&gt; Github&lt;/a&gt;  &lt;a href=&quot;https://www.youtube.com/watch?v=HzsFGQyIpuc&quot;&gt;&lt;i class=&quot;fa fa-youtube-play&quot;&gt;&lt;/i&gt; YouTube demo&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;/fish-music/&quot;&gt;Fish Music&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on December 28, 2014.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Princeton Pianos]]></title>
-  <link rel="alternate" type="text/html" href="/princeton-pianos/" />
-  <id>/princeton-pianos</id>
-  <published>2014-01-18T00:00:00-05:00</published>
-  <updated>2014-01-18T00:00:00-05:00</updated>
-  <author>
-    <name>Jaan Altosaar</name>
-    <uri></uri>
-    <email>jaan@jaan.io</email>
-  </author>
-  <content type="html">&lt;p&gt;I’ve played more piano since starting grad school than throughout my four years at McGill, thanks to the abundance of pianos on campus. The pianos’ conditions range from excellent to passable, with some sporting &lt;a href=&quot;http://en.wikipedia.org/wiki/The_K%C3%B6ln_Concert#The_K.C3.B6ln_concert&quot;&gt;Köln&lt;/a&gt;-level limitations. However, I couldn’t find a resource listing their locations.&lt;/p&gt;
-
-&lt;p&gt;Another ‘open-sourced locations’ project could be to document uncommon study spots. For example, if McGill libraries were crowded I could escape to Purvis Hall’s &lt;a href=&quot;https://www.google.com/maps?ll=45.50447900000001%2C-73.58179800000002&amp;amp;cbp=%2C70.62%2C%2C2%2C-4.739998&amp;amp;layer=c&amp;amp;panoid=tTI0x7ujrMYKWjVhRAd7lw&amp;amp;spn=0.18000000000000788%2C0.30000000000001953&amp;amp;output=classic&amp;amp;cbll=45.504479%2C-73.581798&quot;&gt;solarium&lt;/a&gt;, which was usually empty.&lt;/p&gt;
-
-&lt;p&gt;If I missed a piano, &lt;a href=&quot;mailto:altosaar@princeton.edu&quot;&gt;shoot me an email&lt;/a&gt; and I will add it to the map (&lt;a href=&quot;https://mapsengine.google.com/map/edit?mid=zZ0UKQQpeAC0.kCaCPXTnIEOo&quot;&gt;mobile-friendly link&lt;/a&gt;):&lt;/p&gt;
-
-&lt;iframe src=&quot;https://mapsengine.google.com/map/embed?mid=zZ0UKQQpeAC0.kCaCPXTnIEOo&quot; width=&quot;900&quot; height=&quot;600&quot;&gt;&lt;/iframe&gt;
-
-&lt;figure&gt;
-	&lt;img src=&quot;/images/pianochapel.jpg&quot; /&gt;
-	&lt;figcaption&gt;Piano D: The Steinway in the lecture room in the basement of the chapel.&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure&gt;
-	&lt;img src=&quot;/images/carillon.jpg&quot; /&gt;
-	&lt;figcaption&gt;'Piano' a: Technically not a piano, the carillon is a unique instrument that's close enough!&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure&gt;
-	&lt;img src=&quot;/images/pianomaddy.jpg&quot; /&gt;
-	&lt;figcaption&gt;Piano N: The Yamaha in the Mathey college common room.&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;&lt;em&gt;Thanks to Jordan Ash for his camera-lending abilities.&lt;/em&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;/princeton-pianos/&quot;&gt;Princeton Pianos&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on January 18, 2014.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Couchometer]]></title>
-  <link rel="alternate" type="text/html" href="/couchometer/" />
-  <id>/couchometer</id>
-  <published>2013-10-06T00:00:00-04:00</published>
-  <updated>2013-10-06T00:00:00-04:00</updated>
-  <author>
-    <name>Jaan Altosaar</name>
-    <uri></uri>
-    <email>jaan@jaan.io</email>
-  </author>
-  <content type="html">&lt;p&gt;This app does one thing: times how long you sit, and buzzes to make you get active.&lt;/p&gt;
-
-&lt;p&gt;Open-sourced on &lt;a href=&quot;https://github.com/altosaar/couchometer&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;/couchometer/&quot;&gt;Couchometer&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on October 06, 2013.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[How to apply to grad school]]></title>
-  <link rel="alternate" type="text/html" href="/how-to-apply-to-grad-school/" />
-  <id>/how-to-apply-to-grad-school</id>
-  <updated>2015-10-23T00:00:00-00:00</updated>
-  <published>2013-09-01T00:00:00-04:00</published>
-  
-  <author>
-    <name>Jaan Altosaar</name>
-    <uri></uri>
-    <email>jaan@jaan.io</email>
-  </author>
-  <content type="html">&lt;p&gt;I gave an info session at McGill in March 2013 on applying to graduate schools in Canada, the U.S., and Britain. Here are some things I found most useful and what I wish I had known:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;What is grad school? &lt;a href=&quot;http://matt.might.net/articles/phd-school-in-pictures/&quot;&gt;Matt Might&lt;/a&gt; might have the answer.&lt;/li&gt;
-  &lt;li&gt;Decide where to apply: talk to professors at your school in the fields you are interested in and ask them what schools have the best research programs and people in those fields. If you have multiple interests or haven’t decided what you want to study, pick schools with research groups in a variety of fields.&lt;/li&gt;
-  &lt;li&gt;Deadlines: write down every deadline of every school and fellowship you are considering. If you are applying to start in September, there will be deadlines as early as September the previous year, meaning you should aim to get those applications &lt;em&gt;finished&lt;/em&gt; in August of the previous year. It is never too early to write down the deadlines of every school and fellowship you are applying for (e.g. the Rhodes, NSERC PGS, and Vanier deadlines are in September; Oxford’s first deadline is in October).&lt;/li&gt;
-  &lt;li&gt;Requirements: figure out what you need to submit to the school to apply (viz. navigate the mazes of academic websites). A typical application consists of three letters of recommendation, a two-page statement of purpose (essay), CV, an application fee, and test scores (GRE, subject GRE, and TOEFL).&lt;/li&gt;
-  &lt;li&gt;Apply to as many schools as you can - once you have one application done, additional applications don’t take much time. People typically apply to around ten schools (a few top schools, a few in the middle, and a few ‘safeties’ where admission is anticipated).&lt;/li&gt;
-  &lt;li&gt;Do not worry about the cost of tests and applications - most programs will pay you a decent salary and you will readily make back what you spent (if you gain admission to just one program).&lt;/li&gt;
-  &lt;li&gt;Apply to every scholarship and fellowship you are eligible for which will support your graduate studies. It is good practice writing the research statements and essays and you may even be successful.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;the-application&quot;&gt;The Application&lt;/h3&gt;
-
-&lt;p&gt;Your application will be reviewed by a committee of faculty members (and sometimes senior graduate students). The majority of your graduate schooling consists of doing research – the most important thing you can do in your application is to demonstrate research ability. The best way to do this is to do summer research and work hard in the hopes of getting published and getting good recommendation letters attesting to your research potential. The next best way is to take research-based courses at your school.&lt;/p&gt;
-
-&lt;p&gt;Therefore, start doing research as early as possible. If you’re in high school, send me an &lt;a href=&quot;mailto:altosaar@princeton.edu&quot;&gt;email&lt;/a&gt; and I’ll try to give you a possible path to working in a lab. If you are in college:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Start talking to potential summer research supervisors in November of the previous year (in January of the same year at the latest). You can also apply to work at different schools - a bit harder, but could happen through same process. Look up professors you are interested in working with, and send them a short email with your LaTeXed CV (see below) asking about doing a summer project and in the area of their research that appeals to you. Read one of their papers and mention it in your email (their website may not be current; look up their latest papers on &lt;a href=&quot;http://www.ncbi.nlm.nih.gov/pubmed&quot;&gt;PubMed&lt;/a&gt;, the &lt;a href=&quot;http://arxiv.org/&quot;&gt;arXiv&lt;/a&gt;, or the &lt;a href=&quot;http://www.webofknowledge.com/&quot;&gt;ISI Web of Knowledge&lt;/a&gt;).&lt;/li&gt;
-  &lt;li&gt;Apply for an REU if you are a US citizen, or an &lt;a href=&quot;http://www.nserc-crsng.gc.ca/students-etudiants/ug-pc/usra-brpc_eng.asp&quot;&gt;NSERC USRA&lt;/a&gt; if you are Canadian or to the Caltech SURF program if you are either or neither. The &lt;a href=&quot;https://www.daad.de/rise/en/&quot;&gt;DAAD RISE&lt;/a&gt; program has internship opportunities in Germany
-Jan Gorzny at UToronto has a &lt;a href=&quot;http://www.crypticcode.ca/jan.gorzny/2011/05/nserc-usra-advice/&quot;&gt;helpful page&lt;/a&gt; on the NSERC USRA.&lt;/li&gt;
-  &lt;li&gt;Apply for every summer research scholarship such as the REU, DAAD RISE, Caltech SURF, or NSERC USRA even if you do not have the most competitive application and transcript, as the professor you apply with may decide to fund you through a separate grant if your initial funding application is not successful
-You may have to contact many professors before you find one willing to take you on - this is normal (I contacted around 30 faculty a year and the success rate was ~10%).&lt;/li&gt;
-  &lt;li&gt;Take research courses, as electives or for your degree. For these you will also have to seek out professors to work with. At McGill such courses are the &lt;a href=&quot;http://www.mcgill.ca/science/research/ours/396&quot;&gt;396 research courses&lt;/a&gt;, and other possible routes are MATH 470 (Honours Research Project) or PHYS 459 (Honours Research Project or Thesis).&lt;/li&gt;
-  &lt;li&gt;Before contacting professors, read Matt Might’s &lt;a href=&quot;http://matt.might.net/articles/how-to-email/&quot;&gt;how to email post&lt;/a&gt;, use your official school email address, and &lt;a href=&quot;http://www.boomeranggmail.com/&quot;&gt;Boomerang&lt;/a&gt; your emails to arrive at 3 PM on Wednesdays (see MailChimp’s &lt;a href=&quot;http://mailchimp.com/resources/research/&quot;&gt;email open rates summary&lt;/a&gt;).&lt;/li&gt;
-  &lt;li&gt;If you cannot find a professor willing to take you on for the summer, consider volunteering in a lab for a few hours each week or take a research course to get your foot in the door. If you have LaTeXed your CV (see below), tried the above options, contacted a ton of professors, and have been unsuccessful in securing a summer or semester-long position, send me an &lt;a href=&quot;mailto:altosaar@princeton.edu&quot;&gt;email&lt;/a&gt; and I will do my best to tell you how to improve your application.&lt;/li&gt;
-  &lt;li&gt;Persistence pays off with professors - if they don’t reply initially, show up at their office or send a follow up email. You can also attend local colloquia or talks in fields that interest you; approach professors after their talk to ask about opportunities at their school, get their card or contact info, and follow up via email.&lt;/li&gt;
-  &lt;li&gt;Once you’re working in research, do your best to see your project through from start to finish (this may mean putting in extra, unpaid time).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;making-your-cv-look-good&quot;&gt;Making your CV look good&lt;/h3&gt;
-
-&lt;p&gt;When contacting professors with your CV, make sure it looks good - presentation makes a difference. Don’t use Microsoft Word. Don’t believe me that you should use LaTeX for your CV? Read &lt;a href=&quot;http://nitens.org/taraborelli/latex&quot;&gt;this&lt;/a&gt; for an overview of the benefits.&lt;/p&gt;
-
-&lt;p&gt;To get your CV into LaTeX format, you can look online for CV templates - a good website is &lt;a href=&quot;http://www.latextemplates.com/cat/curricula-vitae&quot;&gt;LaTeX Templates&lt;/a&gt;. Mike King also has a &lt;a href=&quot;http://michaelelliotking.com/articles/learn_latex/&quot;&gt;good intro&lt;/a&gt; to LaTeX.&lt;/p&gt;
-
-&lt;h3 id=&quot;hosting-your-cv-setting-up-a-website&quot;&gt;Hosting your CV, setting up a website&lt;/h3&gt;
-
-&lt;p&gt;Consider setting up a basic website with your CV and projects. You can do this with Google Sites or Wordpress (or Jekyll if you are comfortable with the command line).&lt;/p&gt;
-
-&lt;p&gt;At the very least, include a &lt;a href=&quot;https://www.dropbox.com/help/167/en&quot;&gt;Dropbox link&lt;/a&gt; to your CV whenever you send it in an email. This way you can update your CV at any time and rest assured that the recipients will see the latest version.&lt;/p&gt;
-
-&lt;h3 id=&quot;studying-for-the-gre-and-subject-gre&quot;&gt;Studying for the GRE and subject GRE&lt;/h3&gt;
-
-&lt;p&gt;See &lt;a href=&quot;https://jaan.io/how-to-ace-the-gre-and-physics-gre&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;the-personal-statement&quot;&gt;The Personal Statement&lt;/h3&gt;
-
-&lt;p&gt;Read the guidelines for each school you are applying to - while typically they will ask you to elaborate on your research projects, courses, and future plans, some may ask about teaching or other specific things. If you are applying to many schools, you can use the same essay but change your ‘future plans’ section appropriately. Some tips:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Even if you are not sure of what field you are interested in, pick something that sounds interesting and fits your background and stick to it. If you are deciding between theory and experiment, pick experiment, as it is very difficult to get accepted for theory these days, and most end up switching to experiment anyway. The most convincing essay will typically be the one where you appear most sure of what you want to study.&lt;/li&gt;
-  &lt;li&gt;You are not bound by your statement - you will typically do rotations in three to four groups before deciding on an advisor.&lt;/li&gt;
-  &lt;li&gt;Write down the names of a few professors at the school you are writing the statement for; they will typically be the ones reviewing your case. Make sure your background matches their research program, and that you state which aspect of their research you are interested in.&lt;/li&gt;
-  &lt;li&gt;Write as many concrete examples of projects you did, or things that make you stand out. Have any motivation be as concise as possible (e.g. avoid the ubiquitous “Ever since grade school I knew I wanted to study [insert subject here].”)&lt;/li&gt;
-  &lt;li&gt;Here are two sample essays:
-    &lt;ul&gt;
-      &lt;li&gt;DJ Strouse’s &lt;a href=&quot;http://djstrouse.com/downloads/UWash_Physics-Statement_of_Purpose-DJ_Strouse-1-page.pdf&quot;&gt;one page&lt;/a&gt; and &lt;a href=&quot;http://djstrouse.com/downloads/UWash_Physics-Statement_of_Purpose-DJ_Strouse-2-page.pdf&quot;&gt;two page&lt;/a&gt; statements.&lt;/li&gt;
-      &lt;li&gt;Anon’s &lt;a href=&quot;/files/anon_harvard_statement.pdf&quot;&gt;two page&lt;/a&gt; statement of purpose for Harvard.&lt;/li&gt;
-      &lt;li&gt;My &lt;a href=&quot;/files/JaanAltosaar_Princeton_PersonalStatement.pdf&quot;&gt;two page&lt;/a&gt; statement of purpose.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;letters-of-recommendation&quot;&gt;Letters of Recommendation&lt;/h3&gt;
-
-&lt;p&gt;Matt Might has &lt;a href=&quot;http://matt.might.net/articles/how-to-recommendation-letter/&quot;&gt;good advice&lt;/a&gt; on this, as does &lt;a href=&quot;http://chrisblattman.com/advising/letters/&quot;&gt;Chris Blattman&lt;/a&gt;. Alex Maloney’s &lt;a href=&quot;http://www.physics.mcgill.ca/~maloney/letter_instructions.pdf&quot;&gt;instructions&lt;/a&gt; are good and would apply to any professor you request letters of recommendations from.&lt;/p&gt;
-
-&lt;h3 id=&quot;scholarships-and-fellowships&quot;&gt;Scholarships and Fellowships&lt;/h3&gt;
-
-&lt;p&gt;Apply to every scholarship and fellowship for which you are eligible. For me, this included the &lt;a href=&quot;http://www.rhodeshouse.ox.ac.uk/rhodesscholarship&quot;&gt;Rhodes Scholarship&lt;/a&gt; (I strongly encourage you to apply: the interviews are nerve-wracking and great practice), &lt;a href=&quot;http://cscuk.dfid.gov.uk/apply/scholarships-developed-cw/&quot;&gt;Commonwealth Scholarship&lt;/a&gt;, &lt;a href=&quot;http://www.nserc-crsng.gc.ca/Students-Etudiants/PG-CS/index_eng.asp&quot;&gt;NSERC PGSM&lt;/a&gt;, &lt;a href=&quot;http://www.vanier.gc.ca/eng/home-accueil.aspx&quot;&gt;Vanier Canada Scholarship&lt;/a&gt;, &lt;a href=&quot;http://www.fulbright.ca/programs/canadian-students/traditional-awards.html&quot;&gt;Fulbright Scholarship&lt;/a&gt;, &lt;a href=&quot;http://www.mkingscholarships.ca/index-e.html&quot;&gt;Mackenzie Scholarship&lt;/a&gt; (&lt;a href=&quot;http://www.mcgill.ca/gps/funding/students-postdocs/students/mackenzie&quot;&gt;McGill link&lt;/a&gt;), &lt;a href=&quot;http://www.mcgill.ca/gps/funding/students-postdocs/students/mackenzie&quot;&gt;Delta Upsilon Scholarship&lt;/a&gt; (McGill only), and &lt;a href=&quot;http://www.mcgill.ca/science/student/moyse/&quot;&gt;Moyse Travelling Scholarship&lt;/a&gt; (McGill only). Lesser known sources of scholarships that may have many fewer applicants are offered through professional organizations such as the SPIE, IEE, etc. (see below).&lt;/p&gt;
-
-&lt;h3 id=&quot;attend-conferences-try-a-semester-abroad-join-professional-associations&quot;&gt;Attend conferences, try a semester abroad, join professional associations&lt;/h3&gt;
-
-&lt;p&gt;If you have done research, make a poster and present it at a conference or meeting, regardless of whether you confirmed your hypothesis. Conferences typically have funding you can apply for, and your school may have funds like &lt;a href=&quot;http://sus.mcgill.ca/Menu-Documents/Ambassador-Fund-Application.pdf&quot;&gt;McGill’s Ambassador Fund&lt;/a&gt; to enable students to attend conferences. Additional sources of funding include professional associations, which typically provide free membership for undergraduates. Examples are the &lt;a href=&quot;http://www.cap.ca/&quot;&gt;Canadian Association of Physicists&lt;/a&gt;, &lt;a href=&quot;http://www.iop.org/&quot;&gt;Institute of Physics (IOP)&lt;/a&gt;, &lt;a href=&quot;http://spie.org/&quot;&gt;SPIE&lt;/a&gt;, &lt;a href=&quot;http://www.ieee.org/&quot;&gt;IEEE&lt;/a&gt;, and &lt;a href=&quot;http://societyofwomenengineers.swe.org/&quot;&gt;Society of Women Engineers&lt;/a&gt;.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The Canadian Association of Physicists provides funding for the &lt;a href=&quot;http://cupc.ca/&quot;&gt;Canadian Undergraduate Physics Conference&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;The &lt;a href=&quot;http://www.aps.org/programs/women/workshops/cuwip.cfm&quot;&gt;Conferences for Undergraduate Women in Physics&lt;/a&gt; provides funding to attend the yearly conference&lt;/li&gt;
-  &lt;li&gt;The &lt;a href=&quot;http://cumc.math.ca/&quot;&gt;Canadian Undergraduate Mathematical Conference&lt;/a&gt; also has funding opportunities&lt;/li&gt;
-  &lt;li&gt;The King Abdullah University of Science and Technology holds an &lt;a href=&quot;http://www.kaust.edu.sa/academics/wep/&quot;&gt;undergraduate research poster competition&lt;/a&gt; to which you can apply for full funding to attend&lt;/li&gt;
-  &lt;li&gt;The &lt;a href=&quot;http://www.killamfellowships.com/programs.html&quot;&gt;Killam Fellowship&lt;/a&gt; provides funding for a semester abroad in the US&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;contact-professors-before-and-after-applying&quot;&gt;Contact professors before (and after) applying&lt;/h3&gt;
-
-&lt;p&gt;Send emails to the professors you are interested in working with at the schools you are applying to, ideally well before actually applying. This serves several purposes: you can find out if they will be taking new students or not (this is important - if you only list faculty who are not taking students on your personal statement you are likely to be rejected). Furthermore, you will be able to include your CV if it is not asked for on the official application. To do this, read or skim their latest papers from their website, PubMed, the arXiv, or the ISI Web of Knowledge, and mention which areas of their research interest you. Read Matt Might’s &lt;a href=&quot;http://matt.might.net/articles/how-to-email/&quot;&gt;how to email&lt;/a&gt;, use your official school email address, add a direct link to your hosted CV (see above), and Boomerang your emails to arrive at 9 AM on a Wednesday. Getting personal replies from profs makes a huge difference and can make the process feel much more personal (as well as being good motivation to grind through the months).&lt;/p&gt;
-
-&lt;h3 id=&quot;your-final-year-grades-dont-matter-that-much-and-some-good-courses-to-take&quot;&gt;Your final-year grades don’t matter that much (and some good courses to take)&lt;/h3&gt;
-
-&lt;p&gt;Caveat: they do matter if you plan on doing a Masters and then applying to PhD programs or possibly working in industry, and it’s never bad to have a high GPA.&lt;/p&gt;
-
-&lt;p&gt;However, between courses, GREs, and applications it is easy to get burnt out, so don’t sweat your grades if you get overwhelmed.  Try to plan your courses to maximize your grades (GPA) for the first three years of your undergrad, as grad schools will not see the fall semester grades of your senior year (you apply in December and grades come out in January by which time you will already be hearing back). Alongside research courses, try doing your undergrad thesis in your third year even if it’s normally taken in your senior year (if you work hard you’ll have a publication to list on your application, a good letter of recommendation, and some A’s). Also consider taking scientific writing courses such as McGill’s &lt;a href=&quot;http://www.mcgill.ca/study/2012-2013/courses/ceap-250&quot;&gt;CEAP 250 course&lt;/a&gt; - these will improve your writing and typically culminate in a final report which you could also submit for publication.&lt;/p&gt;
-
-&lt;h3 id=&quot;further-reading&quot;&gt;Further reading&lt;/h3&gt;
-
-&lt;p&gt;Other webpages and resources I found useful:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Matt Might’s &lt;a href=&quot;http://matt.might.net/articles/how-to-apply-and-get-in-to-graduate-school-in-science-mathematics-engineering-or-computer-science/&quot;&gt;super-useful advice&lt;/a&gt; on applying (he has been on admissions committees) and &lt;a href=&quot;http://matt.might.net/articles/college-tips/&quot;&gt;general college tips&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Sean Carroll’s advice on grad school &lt;a href=&quot;http://blogs.discovermagazine.com/cosmicvariance/2005/12/20/unsolicited-advice-1-how-to-get-into-graduate-school/&quot;&gt;part one&lt;/a&gt; and &lt;a href=&quot;http://blogs.discovermagazine.com/cosmicvariance/2006/03/29/unsolicited-advice-part-deux-choosing-a-grad-school/&quot;&gt;part two&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;An &lt;a href=&quot;http://blogs.discovermagazine.com/cosmicvariance/2008/01/29/the-other-side-of-graduate-admissions/&quot;&gt;inside look at admissions&lt;/a&gt; from a former committee member&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/gp/product/0307591549/&quot;&gt;The Happiness Advantage&lt;/a&gt; by Shawn Achor is a fantastic summary of recent positive psychology research for staying sane through this entire process&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/gp/product/0465022227/&quot;&gt;A PhD is not enough&lt;/a&gt; gives a great overview of what grad school is like and what to expect afterwards&lt;/li&gt;
-  &lt;li&gt;DJ Strouse’s excellent &lt;a href=&quot;http://djstrouse.com/guide-to-applying-to-us-science-phd-programs-and-fellowships/&quot;&gt;all-encompassing guide&lt;/a&gt; to applying to grad schools&lt;/li&gt;
-  &lt;li&gt;Philip Guo’s &lt;a href=&quot;http://www.pgbovine.net/PhD-memoir.htm&quot;&gt;PhD Grind&lt;/a&gt; gives a realistic look at grad school&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;what-did-i-miss&quot;&gt;What did I miss?&lt;/h3&gt;
-
-&lt;p&gt;Shoot me an &lt;a href=&quot;mailto:altosaar@princeton.edu&quot;&gt;email&lt;/a&gt; with any recommendations or tips.&lt;/p&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;/how-to-apply-to-grad-school/&quot;&gt;How to apply to grad school&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on September 01, 2013.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[How to ace the GRE and Physics GRE]]></title>
-  <link rel="alternate" type="text/html" href="/how-to-ace-the-gre-and-physics-gre/" />
-  <id>/how-to-ace-the-gre-and-physics-gre</id>
-  <updated>2013-08-28T00:00:00-00:00</updated>
-  <published>2013-08-31T00:00:00-04:00</published>
-  
-  <author>
-    <name>Jaan Altosaar</name>
-    <uri></uri>
-    <email>jaan@jaan.io</email>
-  </author>
-  <content type="html">&lt;p&gt;Most PhD programs in the US require the GRE general test. These scores matter, so start studying early and register at ETS to take the tests as early as possible.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;For the general GRE test, I used and highly recommend The Princeton Review’s Cracking the GRE 2013 edition. It is excellent preparation and includes plenty of practice tests.&lt;/li&gt;
-  &lt;li&gt;Don’t get an older version (e.g. the 2012 version), but get the &lt;a href=&quot;http://www.amazon.com/Cracking-Practice-Edition-Graduate-Preparation/dp/0307945634&quot;&gt;2014 edition&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;ETS periodically adds new material to the tests so you want the most up-to-date book. You can take a computer-based or hand-written version of the test; I recommend the handwritten version as it is easier to make notes and work out the problems on the test booklet itself than on paper beside the computer.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The &lt;a href=&quot;http://www.ets.org/gre/subject/about/content/physics&quot;&gt;Physics GRE subject test&lt;/a&gt; is much more involved, and much more difficult. There are no omnipotent books from The Princeton Review, and you have to do the best you can using a variety of sources. Your Physics GRE score matters a lot if you are applying to Physics programs (especially if you are an international student, as some schools have cutoffs). Successful preparation in one sentence would be: do the 500 practice problems found online (links below) and understand the solutions and how to do them as fast as possible. In summary:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Your goal should not necessarily be to understand the material&lt;/strong&gt;; it should be to ace this test in as little time as possible (not even ace – there is a heavy curve so an excellent score is typically 80 questions correct out of 100).&lt;/li&gt;
-  &lt;li&gt;You have &lt;strong&gt;very little time per question&lt;/strong&gt; so once you’ve understood a question, check the solutions websites if a comment gives a faster method of solving it by taking limits or physical intuition. Memorize the formulas you see popping up again and again (see formula sheets below).&lt;/li&gt;
-  &lt;li&gt;Focus all your effort on writing the practice tests and reviewing the questions. Do not rely heavily or spend much time (if any) on an official ‘How to prepare for the Physics GRE’ book – the material is too extensive to be condensed into this form.
-The 2012 Physics GRE was very similar to the 2008 test, so it pays to ensure you understand and can quickly do all 500 practice questions. This will take time so start early.&lt;/li&gt;
-  &lt;li&gt;Preferably take the April test (register &lt;a href=&quot;http://www.ets.org/gre/subject/about/content/physics&quot;&gt;here&lt;/a&gt;) so you can write the October test if you need to (if you write the November test you will not have a chance to retake it, and if you take the October test you will not receive your scores by the November test).&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;The old tests from the 90s are much harder than the current versions, so if you are short on time focus more on the most recent practice tests.
-Here are links to the five practice tests found online, with online solutions. &lt;strong&gt;IMPORTANT: read the comments of the online solutions, as they frequently give ways of solving problems much faster.&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;https://www.ets.org/s/gre/pdf/practice_book_physics.pdf&quot;&gt;GR0877&lt;/a&gt; &lt;a href=&quot;http://physicsworks.wordpress.com/2011/07/16/gr0877-solutions/&quot;&gt;(online solutions)&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;http://www.physics.ohio-state.edu/undergrad/greStuff/exam_GR0177.pdf&quot;&gt;GR0177&lt;/a&gt; &lt;a href=&quot;http://grephysics.net/ans/all-solutions_list.php&quot;&gt;(online solutions)&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;http://www.physics.ohio-state.edu/undergrad/greStuff/exam_GR9677.pdf&quot;&gt;GR9677&lt;/a&gt; &lt;a href=&quot;http://grephysics.net/ans/all-solutions_list.php&quot;&gt;(online solutions)&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;http://www.physics.ohio-state.edu/undergrad/greStuff/exam_GR9277.pdf&quot;&gt;GR9277&lt;/a&gt; &lt;a href=&quot;http://grephysics.net/ans/all-solutions_list.php&quot;&gt;(online solutions)&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;http://www.physics.ohio-state.edu/undergrad/greStuff/exam_GR8677.pdf&quot;&gt;GR8677&lt;/a&gt; &lt;a href=&quot;http://grephysics.net/ans/all-solutions_list.php&quot;&gt;(online solutions)&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;The awesome folks at Case Western Reserve University will send you &lt;strong&gt;free (FREE!) flash cards&lt;/strong&gt; for the Physics GRE, all you have to do is send your address to &lt;a href=&quot;mailto:physicsgreflashcards@phys.cwru.edu&quot;&gt;physicsgreflashcards@phys.cwru.edu&lt;/a&gt; and they will put them in the mail (also have a look at their &lt;a href=&quot;http://www.phys.cwru.edu/flashCards/&quot;&gt;website&lt;/a&gt;).&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Two former MIT students wrote a &lt;a href=&quot;http://www.amazon.com/gp/product/1479274631/&quot;&gt;decent book&lt;/a&gt; attempting to summarize the material (I used a few chapters of this to review material).&lt;/li&gt;
-  &lt;li&gt;Here are links to some formula sheets:
-    &lt;ul&gt;
-      &lt;li&gt;Steven J. Byrnes of Harvard wrote a helpful and  up-to-date &lt;a href=&quot;http://sjbyrnes.com/studysheet.pdf&quot;&gt;formula sheet&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;The Harvard Society of Physics Students also hosts &lt;a href=&quot;http://www.hcs.harvard.edu/~physics/wp-content/uploads/2013/02/GRE-notes.pdf&quot;&gt;some formula sheets&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Additional ‘how to prepare for the Physics GRE pages’:
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;http://www.hcs.harvard.edu/~physics/gre-resources/&quot;&gt;GRE Resources&lt;/a&gt; from the Harvard Society of Physics Students&lt;/li&gt;
-      &lt;li&gt;The infamous &lt;a href=&quot;http://www.physicsgre.com/&quot;&gt;PhysicsGRE.com forum&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;Alex Lang of BU has a &lt;a href=&quot;http://www.alexhunterlang.com/physics-gre&quot;&gt;Physics GRE advice&lt;/a&gt; page with a study plan&lt;/li&gt;
-      &lt;li&gt;DJ Strouse of Princeton also has &lt;a href=&quot;http://djstrouse.com/guide-to-applying-to-us-science-phd-programs-and-fellowships/&quot;&gt;GRE advice&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;http://blogs.discovermagazine.com/cosmicvariance/2009/10/22/an-inside-look-at-the-physics-gre/&quot;&gt;An inside look at the Physics GRE&lt;/a&gt; from a former testing committee member&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;/how-to-ace-the-gre-and-physics-gre/&quot;&gt;How to ace the GRE and Physics GRE&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on August 31, 2013.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Immunize Canada]]></title>
-  <link rel="alternate" type="text/html" href="/immunize-canada-app/" />
-  <id>/immunize-canada-app</id>
-  <published>2013-08-15T00:00:00-04:00</published>
-  <updated>2013-08-15T00:00:00-04:00</updated>
-  <author>
-    <name>Jaan Altosaar</name>
-    <uri></uri>
-    <email>jaan@jaan.io</email>
-  </author>
-  <content type="html">&lt;p&gt;I was lucky to lead the design of Canada’s national vaccinations app. Currently 140k+ users.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Featured&lt;/em&gt; on the &lt;a href=&quot;http://www.cbc.ca/news/canada/ottawa/immunizeca-app-helps-people-keep-track-of-vaccinations-1.2581274&quot;&gt;CBC&lt;/a&gt;, won &lt;a href=&quot;http://www.cpha.ca/en/about/media/app-award.aspx&quot;&gt;award&lt;/a&gt; for “using wireless technology to improve the lives of Canadians”.&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;/immunize-canada-app/&quot;&gt;Immunize Canada&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on August 15, 2013.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Smoked salmon openfacer]]></title>
-  <link rel="alternate" type="text/html" href="/smoked-salmon-open-faced-sandwich.md/" />
-  <id>/smoked-salmon-open-faced-sandwich.md</id>
-  <updated>2015-11-24T00:00:00-00:00</updated>
-  <published>2013-07-19T00:00:00-04:00</published>
-  
-  <author>
-    <name>Jaan Altosaar</name>
-    <uri></uri>
-    <email>jaan@jaan.io</email>
-  </author>
-  <content type="html">This sandwich is an all-time classic hall-of-famer mainstay in my family. It's a classy breakfast, lunch, or dinner, and is great for hosting (guests can make their own sandwiches). Just brush your teeth after consumption.
-
-###Ingredients
-
-* White bread with sesame seeds, well-toasted
-* Unsalted butter
-* Fresh smoked salmon, sliced [[^1]]
-* Lemon
-* Capers or thinly sliced caperberries
-* Green onions (shallots or white onions are good substitutes)
-* Olive oil
-* Sea salt flakes
-* Freshly ground pepper
-
-###Instructions
-Toast the bread. Finely dice the shallots, onions, or green onions.
-
-Liberally butter the toasted bread, and cover the entirety of the toast's surface with a single layer of smoked salmon. Sprinkle the sheet of salmon with lemon juice.
-
-Evenly cover with the diced shallots and capers in about a 3:1 ratio of onions to capers.
-
-Pour a decent amount (about 1 tablespoon) of olive oil onto the sandwich. Scatter sea salt flakes and finish it with some ground pepper.
-
-This is easiest to eat with knife and fork due to the olive oil overdose. Serve with a glass of wine or whole milk, depending on time of day.
-
-[^1]: Aim to buy fresh 'chunk' sushi-grade smoked salmon (ideally, never frozen) from your local fishmonger. Slice it with a sharp knife to your preferred thickness. This allows you to achiveve thinner slices than the pre-sliced smoked salmon from normal grocery stores.
-
-&lt;figure&gt;
-	&lt;img src=&quot;/images/smoked-salmon-9.jpg&quot;&gt;&lt;/a&gt;
-&lt;/figure&gt;
-
-&lt;figure&gt;
-	&lt;img src=&quot;/images/smoked-salmon-1.jpg&quot;&gt;&lt;/a&gt;
-&lt;/figure&gt;
-
-&lt;figure&gt;
-	&lt;img src=&quot;/images/smoked-salmon-7.jpg&quot;&gt;&lt;/a&gt;
-&lt;/figure&gt;
-
-&lt;figure&gt;
-	&lt;img src=&quot;/images/smoked-salmon-8.jpg&quot;&gt;&lt;/a&gt;
-&lt;/figure&gt;
-
-&lt;figure&gt;
-	&lt;img src=&quot;/images/smoked-salmon-15.jpg&quot;&gt;&lt;/a&gt;
-&lt;/figure&gt;
-
-&lt;figure&gt;
-	&lt;img src=&quot;/images/smoked-salmon-16.jpg&quot;&gt;&lt;/a&gt;
-&lt;/figure&gt;
-
-*Thank you [Mike King](http://michaelelliotking.com/) for the food photography, Joel Ryan for coining 'openfacers', and [Frank Megna](http://cargocollective.com/frankmegna) for the slogan!* This post originally appeared at openfacers.com, the now-defunct food blog focused solely on open-faced sandwiches.
-
-
-
-
-  &lt;p&gt;&lt;a href=&quot;/smoked-salmon-open-faced-sandwich.md/&quot;&gt;Smoked salmon openfacer&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on July 19, 2013.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Reality distortion]]></title>
-  <link rel="alternate" type="text/html" href="/photography/" />
-  <id>/photography</id>
-  <published>2011-01-01T00:00:00-05:00</published>
-  <updated>2011-01-01T00:00:00-05:00</updated>
-  <author>
-    <name>Jaan Altosaar</name>
-    <uri></uri>
-    <email>jaan@jaan.io</email>
-  </author>
-  <content type="html">&lt;p&gt;I took a bunch of pictures and edited them to be cooler than reality. On hiatus to focus on research, music, and people.&lt;/p&gt;
-
-&lt;p&gt;Because I release everything uncopyrighted, my photos are &lt;em&gt;featured&lt;/em&gt; on &lt;a href=&quot;https://thenewtropic.com/tourism-economy-culture/&quot;&gt;extremely&lt;/a&gt; &lt;a href=&quot;http://viagemempauta.com.br/2015/11/09/destinos-vistos-do-alto/&quot;&gt;random&lt;/a&gt; &lt;a href=&quot;http://www.liligo.co.uk/travel-magazine/a-fall-in-airfare-has-prompted-people-to-travel-more-this-year-21250.html&quot;&gt;websites&lt;/a&gt; (including &lt;a href=&quot;http://www.theatlantic.com/business/archive/2016/05/how-a-neighborhood-block-can-affect-a-persons-success/483983/&quot;&gt;The Atlantic&lt;/a&gt;, &lt;a href=&quot;http://www.huffingtonpost.ca/2015/03/09/loblaw-plans-on-opening-5_n_6829712.html&quot;&gt;HuffPo&lt;/a&gt;, &lt;a href=&quot;http://www.outsideonline.com/2060641/our-reliance-technology-makes-backcountry-more-dangerous&quot;&gt;Outside Magazine&lt;/a&gt; and &lt;a href=&quot;http://gizmodo.com/preserving-land-isnt-enough-to-save-the-tropics-1770276264&quot;&gt;Gizmodo&lt;/a&gt;!).&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;/photography/&quot;&gt;Reality distortion&lt;/a&gt; was originally published by Jaan Altosaar at &lt;a href=&quot;&quot;&gt;Jaan&lt;/a&gt; on January 01, 2011.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/college-scorecard/&quot;&gt;College Scorecard&lt;/a&gt; was originally published by Michael Bostwick at &lt;a href=&quot;&quot;&gt;Michael&lt;/a&gt; on May 01, 2015.&lt;/p&gt;</content>
 </entry>
 
 </feed>
