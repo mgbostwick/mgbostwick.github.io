@@ -5,7 +5,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="/feed.xml" />
 <link rel="alternate" type="text/html" href="" />
-<updated>2017-08-02T15:55:52-04:00</updated>
+<updated>2017-08-04T10:42:11-04:00</updated>
 <id>/</id>
 <author>
   <name>Michael Bostwick</name>
@@ -25,7 +25,10 @@
     <uri></uri>
     <email></email>
   </author>
-  <content type="html">&lt;p&gt;Using topic modeling on Yelp reviews to predict health inspection violations&lt;/p&gt;
+  <content type="html">&lt;p&gt;A deep dive into the predictive power of Supervised Latent Dirichlet Allocation on text reviews to detect food safety concerns.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/files/hidden_warnings.pdf&quot;&gt;&lt;i class=&quot;fa fa-file-pdf-o&quot;&gt;&lt;/i&gt; PDF&lt;/a&gt;
+&lt;a href=&quot;https://github.com/mgbostwick/health_yelp&quot;&gt;&lt;i class=&quot;fa fa-github&quot;&gt;&lt;/i&gt; Github&lt;/a&gt;&lt;/p&gt;
 
   &lt;p&gt;&lt;a href=&quot;/hidden-warnings/&quot;&gt;Hidden warnings; using topic modeling on Yelp reviews to predict health inspection violations&lt;/a&gt; was originally published by Michael Bostwick at &lt;a href=&quot;&quot;&gt;Michael&lt;/a&gt; on May 03, 2017.&lt;/p&gt;</content>
 </entry>
@@ -42,9 +45,31 @@
     <uri></uri>
     <email></email>
   </author>
-  <content type="html">&lt;p&gt;Using topic modeling on Yelp reviews to recommend new restaurants to users.&lt;/p&gt;
+  <content type="html">&lt;p&gt;My first foray into text mining to build a modified recommender system with reduced sparsity.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/mgbostwick/yelp_project&quot;&gt;&lt;i class=&quot;fa fa-github&quot;&gt;&lt;/i&gt; Github&lt;/a&gt;&lt;/p&gt;
 
   &lt;p&gt;&lt;a href=&quot;/yelp-recommender/&quot;&gt;Yelp review text recommender system&lt;/a&gt; was originally published by Michael Bostwick at &lt;a href=&quot;&quot;&gt;Michael&lt;/a&gt; on December 03, 2016.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Journal article in Vaccine]]></title>
+  <link rel="alternate" type="text/html" href="/vaccine-article/" />
+  <id>/vaccine-article</id>
+  <published>2016-08-01T00:00:00-04:00</published>
+  <updated>2016-08-01T00:00:00-04:00</updated>
+  <author>
+    <name>Michael Bostwick</name>
+    <uri></uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;Contributed data processing and calculation of estimates for article:
+“Knowledge of influenza vaccination recommendation and early vaccination uptake during the 2015–16 season among adults aged ≥18 years – United States”&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.sciencedirect.com/science/article/pii/S0264410X1730871X&quot;&gt;&lt;i class=&quot;fa fa-institution&quot;&gt;&lt;/i&gt; Journal&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;/vaccine-article/&quot;&gt;Journal article in Vaccine&lt;/a&gt; was originally published by Michael Bostwick at &lt;a href=&quot;&quot;&gt;Michael&lt;/a&gt; on August 01, 2016.&lt;/p&gt;</content>
 </entry>
 
 
@@ -59,7 +84,10 @@
     <uri></uri>
     <email></email>
   </author>
-  <content type="html">&lt;p&gt;Lead author/poster presenter at AAPOR 2016.&lt;/p&gt;
+  <content type="html">&lt;p&gt;Compared responses on Mobile vs Tablet vs Computer devices to National Internet Flu Survey for CDC.
+Presented findings at American Association for Public Opinion Research (AAPOR) 2016 conference.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/files/survey-device-effect.pdf&quot;&gt;&lt;i class=&quot;fa fa-file-pdf-o&quot;&gt;&lt;/i&gt; PDF&lt;/a&gt;&lt;/p&gt;
 
   &lt;p&gt;&lt;a href=&quot;/survey-device-effect/&quot;&gt;Impact of Survey Device on Response to an Early Season Influenza Vaccination Survey&lt;/a&gt; was originally published by Michael Bostwick at &lt;a href=&quot;&quot;&gt;Michael&lt;/a&gt; on May 15, 2016.&lt;/p&gt;</content>
 </entry>
@@ -76,7 +104,10 @@
     <uri></uri>
     <email></email>
   </author>
-  <content type="html">&lt;p&gt;Poster presenter at AAPOR 2015.&lt;/p&gt;
+  <content type="html">&lt;p&gt;Evaluated suitability of web panel survey compared to traditional large-scale surveys for early-season 
+flu vaccination estimation for CDC. Presented findings at AAPOR 2015 conference.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/files/fit-for-purpose.pdf&quot;&gt;&lt;i class=&quot;fa fa-file-pdf-o&quot;&gt;&lt;/i&gt; PDF&lt;/a&gt;&lt;/p&gt;
 
   &lt;p&gt;&lt;a href=&quot;/fit-for-purpose/&quot;&gt;Fit for Purpose&lt;/a&gt; was originally published by Michael Bostwick at &lt;a href=&quot;&quot;&gt;Michael&lt;/a&gt; on May 15, 2015.&lt;/p&gt;</content>
 </entry>
@@ -93,7 +124,9 @@
     <uri></uri>
     <email></email>
   </author>
-  <content type="html">&lt;p&gt;Contributed to data preparation for inaugural edition of College Scorecard.&lt;/p&gt;
+  <content type="html">&lt;p&gt;Programmed data processing scripts for the Department of Education’s inaugural edition of the College Scorecard.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://collegescorecard.ed.gov&quot;&gt;&lt;i class=&quot;fa fa-laptop&quot;&gt;&lt;/i&gt; Website&lt;/a&gt;&lt;/p&gt;
 
   &lt;p&gt;&lt;a href=&quot;/college-scorecard/&quot;&gt;College Scorecard&lt;/a&gt; was originally published by Michael Bostwick at &lt;a href=&quot;&quot;&gt;Michael&lt;/a&gt; on May 01, 2015.&lt;/p&gt;</content>
 </entry>
