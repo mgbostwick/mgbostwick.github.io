@@ -104,6 +104,9 @@
           </ul>
         </nav>
       </div>
+      
+
+      
     </header>
 
 
@@ -289,7 +292,7 @@ flu vaccination estimation for CDC. Presented findings at AAPOR 2015 conference.
         </ul>
     </div>
     </aside>-->
-    <!-- <small>&copy; 2017 <a href="mailto:jaan@jaan.io"> Michael Bostwick </a></small> -->
+    <!-- <small>&copy; 2018 <a href="mailto:jaan@jaan.io"> Michael Bostwick </a></small> -->
     <center><a href="https://www.linkedin.com/in/michaelbostwick1/" target="_blank"><i class="fa fa-linkedin"></i></a>
     <a href="https://github.com/mgbostwick" target="_blank"><i class="fa fa-github"></i></a></center>
   </footer>
@@ -303,6 +306,29 @@ flu vaccination estimation for CDC. Presented findings at AAPOR 2015 conference.
   <script async src="/assets/js/scripts.js"></script>
 
 
+  
+  <!-- Asynchronous Google Analytics snippet -->
+  <script>
+    var _gaq = _gaq || [];
+    var pluginUrl =
+    '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+    _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+    _gaq.push(['_setAccount', 'UA-111948916-1']);
+    _gaq.push(['_trackPageview']);
+
+  setTimeout(function() {
+    window.onscroll = function() {
+      window.onscroll = null; // Only track the event once
+      _gaq.push(['_trackEvent', 'scroll', 'read']);
+    }
+  }, 5000);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
   
 
   </body>

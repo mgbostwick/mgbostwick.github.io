@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <title>Home &#8211; Michael Bostwick</title>
-<meta name="description" content="I'm a MS student in Statistics and Operations Research at UNC-Chapel Hill.">
+<meta name="description" content="I'm an MS student in Statistics and Operations Research at UNC-Chapel Hill.">
 <meta name="keywords" content="michael bostwick, UNC, chapel hill, grad school, machine learning, statistics, operations research">
 
 
@@ -14,7 +14,7 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:title" content="Home &#8211; Michael Bostwick">
-<meta property="og:description" content="I'm a MS student in Statistics and Operations Research at UNC-Chapel Hill.">
+<meta property="og:description" content="I'm an MS student in Statistics and Operations Research at UNC-Chapel Hill.">
 <meta property="og:url" content="/">
 <meta property="og:site_name" content="Michael Bostwick">
 <meta property="og:image" content="/images/">
@@ -104,13 +104,16 @@
           </ul>
         </nav>
       </div>
+      
+
+      
     </header>
 
 
     <div id='bump'>
         <section class="article archive">
           <article class="archive-wrap">
-            <p class="intro">I'm a MS student at UNC-Chapel Hill studying Statistics and Operations Research with a concentration in Machine Learning. 
+            <p class="intro">I'm an MS student at UNC-Chapel Hill studying Statistics and Operations Research with a concentration in Machine Learning. 
             This past summer I was a Data Science Intern at FinTech startup, <a href="https://engineering.spreedly.com/blog/machine-learning-in-practice.html">Spreedly</a>, and will be graduating in May 2018.
             Read more <a href="/about">about me</a>, check out some of my <a href="/projects">projects</a>, or view <a href="/files/Bostwick-Resume.pdf">my Resume</a>.</p>
             <!-- <img id="jathumb" src="images/jathumb.jpg"/> -->
@@ -200,6 +203,29 @@
   <script src="/assets/js/scripts.js"></script>
 
 
+  
+  <!-- Asynchronous Google Analytics snippet -->
+  <script>
+    var _gaq = _gaq || [];
+    var pluginUrl =
+    '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+    _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+    _gaq.push(['_setAccount', 'UA-111948916-1']);
+    _gaq.push(['_trackPageview']);
+
+  setTimeout(function() {
+    window.onscroll = function() {
+      window.onscroll = null; // Only track the event once
+      _gaq.push(['_trackEvent', 'scroll', 'read']);
+    }
+  }, 5000);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
   
 
   </body>

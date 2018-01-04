@@ -106,6 +106,9 @@
           </ul>
         </nav>
       </div>
+      
+
+      
     </header>
 
 
@@ -122,7 +125,7 @@
           </hgroup>
         </header>
 
-        <p>Currently I’m a MS Student at UNC-Chapel Hill studying Statistics and Operations Research <a href="http://stat-or.unc.edu">(UNC STOR)</a> with
+        <p>Currently I’m an MS Student at UNC-Chapel Hill studying Statistics and Operations Research <a href="http://stat-or.unc.edu">(UNC STOR)</a> with
 a concentration in Machine Learning. I’m developing a deep understanding of how and why quantitative techniques
 work so that I can effectively apply them to complex business problems. My interests include explanatory and predictive modeling, coding in 
 R and Python, and data visualization.</p>
@@ -195,7 +198,7 @@ non-profit <a href="http://www.cru.org">CRU</a>. I have a BS in Statistics from 
         </ul>
     </div>
     </aside>-->
-    <!-- <small>&copy; 2017 <a href="mailto:jaan@jaan.io"> Michael Bostwick </a></small> -->
+    <!-- <small>&copy; 2018 <a href="mailto:jaan@jaan.io"> Michael Bostwick </a></small> -->
     <center><a href="https://www.linkedin.com/in/michaelbostwick1/" target="_blank"><i class="fa fa-linkedin"></i></a>
     <a href="https://github.com/mgbostwick" target="_blank"><i class="fa fa-github"></i></a></center>
   </footer>
@@ -209,6 +212,29 @@ non-profit <a href="http://www.cru.org">CRU</a>. I have a BS in Statistics from 
   <script async src="/assets/js/scripts.js"></script>
 
 
+  
+  <!-- Asynchronous Google Analytics snippet -->
+  <script>
+    var _gaq = _gaq || [];
+    var pluginUrl =
+    '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+    _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+    _gaq.push(['_setAccount', 'UA-111948916-1']);
+    _gaq.push(['_trackPageview']);
+
+  setTimeout(function() {
+    window.onscroll = function() {
+      window.onscroll = null; // Only track the event once
+      _gaq.push(['_trackEvent', 'scroll', 'read']);
+    }
+  }, 5000);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
   
 
   </body>
