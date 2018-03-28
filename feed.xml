@@ -5,13 +5,33 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="/feed.xml" />
 <link rel="alternate" type="text/html" href="" />
-<updated>2018-03-25T14:05:33-04:00</updated>
+<updated>2018-03-28T10:59:13-04:00</updated>
 <id>/</id>
 <author>
   <name>Michael Bostwick</name>
   <uri>/</uri>
   <email></email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Survival of the Fittest; Variable Selection on Agricultural Data from the Galapagos Islands]]></title>
+  <link rel="alternate" type="text/html" href="/galapagos/" />
+  <id>/galapagos</id>
+  <published>2018-03-27T00:00:00-04:00</published>
+  <updated>2018-03-27T00:00:00-04:00</updated>
+  <author>
+    <name>Michael Bostwick</name>
+    <uri></uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;Found key variables among 200+ candidates using Elastic Net and Forward Selection.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/files/Bostwick_Masters_Paper.pdf&quot;&gt;&lt;i class=&quot;fa fa-file-pdf-o&quot;&gt;&lt;/i&gt; PDF&lt;/a&gt;
+&lt;a href=&quot;https://github.com/mgbostwick/galapagos&quot;&gt;&lt;i class=&quot;fa fa-github&quot;&gt;&lt;/i&gt; Github&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;/galapagos/&quot;&gt;Survival of the Fittest; Variable Selection on Agricultural Data from the Galapagos Islands&lt;/a&gt; was originally published by Michael Bostwick at &lt;a href=&quot;&quot;&gt;Michael&lt;/a&gt; on March 27, 2018.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
