@@ -5,7 +5,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="/feed.xml" />
 <link rel="alternate" type="text/html" href="" />
-<updated>2018-03-28T10:59:13-04:00</updated>
+<updated>2018-05-04T09:48:55-04:00</updated>
 <id>/</id>
 <author>
   <name>Michael Bostwick</name>
@@ -74,7 +74,7 @@
 
 
 <entry>
-  <title type="html"><![CDATA[Journal article in Vaccine]]></title>
+  <title type="html"><![CDATA[Knowledge of influenza vaccination recommendation and early vaccination uptake during the 2015–16 season]]></title>
   <link rel="alternate" type="text/html" href="/vaccine-article/" />
   <id>/vaccine-article</id>
   <published>2016-08-01T00:00:00-04:00</published>
@@ -84,12 +84,11 @@
     <uri></uri>
     <email></email>
   </author>
-  <content type="html">&lt;p&gt;Contributed data processing and calculation of estimates for article:
-“Knowledge of influenza vaccination recommendation and early vaccination uptake during the 2015–16 season among adults aged ≥18 years – United States”&lt;/p&gt;
+  <content type="html">&lt;p&gt;Contributed data processing and calculation of estimates for journal article in Vaccine&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://www.sciencedirect.com/science/article/pii/S0264410X1730871X&quot;&gt;&lt;i class=&quot;fa fa-institution&quot;&gt;&lt;/i&gt; Journal&lt;/a&gt;&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/vaccine-article/&quot;&gt;Journal article in Vaccine&lt;/a&gt; was originally published by Michael Bostwick at &lt;a href=&quot;&quot;&gt;Michael&lt;/a&gt; on August 01, 2016.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;/vaccine-article/&quot;&gt;Knowledge of influenza vaccination recommendation and early vaccination uptake during the 2015–16 season&lt;/a&gt; was originally published by Michael Bostwick at &lt;a href=&quot;&quot;&gt;Michael&lt;/a&gt; on August 01, 2016.&lt;/p&gt;</content>
 </entry>
 
 
